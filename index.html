@@ -263,6 +263,7 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .gift { position: relative; border-radius: var(--radius-lg); overflow: hidden; }
 .gift img { display: block; width: 100%; }
 .gift-band { position: absolute; top: 9%; right: -14%; width: 56%; padding: 11px 0; transform: rotate(35deg); background: #16483A; color: #E8C97A; text-align: center; font: 700 0.85rem/1 var(--font-body); letter-spacing: 0.12em; text-transform: uppercase; box-shadow: 0 4px 14px rgba(0,0,0,.22); }
+.gift-band--bl { top: auto; right: auto; bottom: 9%; left: -14%; background: var(--red); color: #fff; }
 .buy-grid .prose { gap: 16px; justify-items: start; }
 .offers { display: grid; gap: 12px; width: 100%; max-width: 520px; }
 .offer { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; }
@@ -574,6 +575,7 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
       <div class="gift">
         <img src="assets/img/kniha-mockup.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel" loading="lazy">
         <span class="gift-band" aria-hidden="true">Vianočný darček</span>
+        <span class="gift-band gift-band--bl" aria-hidden="true">Doprava zdarma</span>
       </div>
       <div class="prose">
         <p class="eyebrow">Akcia</p>
