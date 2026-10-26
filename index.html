@@ -161,7 +161,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* Press feature – Historická revue */
 .press-feature { background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--line); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
 .press-feature figure { margin: 0; position: relative; min-height: 280px; }
-.press-feature figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 40%; }
+.press-feature figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 60%; }
+.press-photo { overflow: hidden; background: #2a2622; }
+.press-photo img { filter: sepia(.25) contrast(1.05); transform-origin: 30% 65%; animation: kenburns 22s ease-in-out infinite alternate; }
+@keyframes kenburns { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.18) translate(3%, -2%); } }
+.press-photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 16px 12px; font-size: 0.78rem; line-height: 1.35; color: #F4EEE6; background: linear-gradient(transparent, rgba(20,14,10,.75)); }
+@media (prefers-reduced-motion: reduce) { .press-photo img { animation: none; } }
 .press-feature .press-body { padding: clamp(24px, 4vw, 48px); display: grid; gap: 16px; align-content: center; justify-items: start; }
 .press-source { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .press-source img { height: 26px; width: auto; }
@@ -379,8 +384,9 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
   <section class="section" style="padding-top:0" aria-labelledby="hr-title">
     <div class="wrap">
       <article class="press-feature">
-        <figure>
-          <img src="assets/img/malba-suboj-1200.jpg" alt="Maľba súboja dvojplošníka Letov Š-328 s nemeckým Focke-Wulf Fw 189" loading="lazy">
+        <figure class="press-photo">
+          <img src="assets/img/beznak-kanon-1942.jpg" width="1226" height="816" alt="Matej Beznák za mieridlami protilietadlového kanóna, Žitomir 1942" loading="lazy">
+          <figcaption>Matej Beznák (dole) za mieridlami protilietadlového kanóna, Žitomir 1942. Zdroj: archív Mateja Beznáka</figcaption>
         </figure>
         <div class="press-body">
           <p class="eyebrow">Napísali o nás</p>
