@@ -260,6 +260,9 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .buy { background: var(--sand); }
 .buy-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
 .buy-grid img { border-radius: var(--radius-lg); }
+.gift { position: relative; border-radius: var(--radius-lg); overflow: hidden; }
+.gift img { display: block; width: 100%; }
+.gift-band { position: absolute; top: 9%; right: -14%; width: 56%; padding: 10px 0; transform: rotate(35deg); background: var(--red); color: #fff; text-align: center; font: 700 0.85rem/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; box-shadow: 0 4px 14px rgba(0,0,0,.2); }
 .buy-grid .prose { gap: 16px; justify-items: start; }
 .offers { display: grid; gap: 12px; width: 100%; max-width: 520px; }
 .offer { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; }
@@ -568,7 +571,10 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 
   <section class="section buy" id="kupit">
     <div class="wrap buy-grid">
-      <img src="assets/img/kniha-darcek.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel s darčekovou mašľou" loading="lazy">
+      <div class="gift">
+        <img src="assets/img/kniha-mockup.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel" loading="lazy">
+        <span class="gift-band" aria-hidden="true">Vianočný darček</span>
+      </div>
       <div class="prose">
         <p class="eyebrow">Akcia</p>
         <h2>Ideálne ako vianočný darček</h2>
