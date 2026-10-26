@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://poslednyzostrel.sk/</loc><lastmod>2026-10-26</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+    <image:image><image:loc>https://poslednyzostrel.sk/assets/img/kniha-mockup.jpg</image:loc><image:title>Kniha Posledný zostrel</image:title></image:image>
+    <image:image><image:loc>https://poslednyzostrel.sk/assets/img/malba-suboj.jpg</image:loc><image:title>Súboj Letov Š-328 s Focke-Wulf Fw 189 – maľba Pavla Sluku</image:title></image:image>
+  </url>
+  <url><loc>https://poslednyzostrel.sk/matej-beznak</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+    <image:image><image:loc>https://poslednyzostrel.sk/assets/img/beznak-kanon-1942.jpg</image:loc><image:title>Matej Beznák, Žitomir 1942</image:title></image:image>
+  </url>
+</urlset>

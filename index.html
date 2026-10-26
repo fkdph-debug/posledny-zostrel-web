@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Posledný zostrel</title>
-<meta name="description" content="Posledný zostrel – strhujúce spomienky slovenskej leteckej legendy Mateja Beznáka. Druhé, doplnené vydanie kultovej knihy Takmer pravdivý príbeh. 328 strán, vyše 250 dobových fotografií.">
+<title>Posledný zostrel – kniha o letcovi Matejovi Beznákovi | Jakub Prokeš</title>
+<meta name="description" content="Kniha Posledný zostrel: skutočný príbeh Mateja Beznáka, letca SNP, ktorý 7. 9. 1944 zostrelil z dvojplošníka Letov Š-328 nemecký Focke-Wulf Fw 189 – posledný zostrel z dvojplošníka v 2. svetovej vojne. 328 strán, 250+ dobových fotografií. Doprava zdarma.">
 <meta property="og:type" content="book">
 <meta property="og:title" content="Posledný zostrel – Matej Beznák, Jakub Prokeš">
 <meta property="og:description" content="Slovenský letec, ktorý 7. septembra 1944 zostrelil z plátenného dvojplošníka moderné nemecké lietadlo. Kniha o poslednom zostrele z dvojplošníka v 2. svetovej vojne.">
@@ -13,6 +13,19 @@
 <link rel="canonical" href="https://poslednyzostrel.sk/">
 <meta property="og:locale" content="sk_SK">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Posledný zostrel – kniha o letcovi Matejovi Beznákovi">
+<meta name="twitter:description" content="Posledný zostrel z dvojplošníka v 2. svetovej vojne. 328 strán, 250+ dobových fotografií, mapy Luftwaffe. Doprava zdarma.">
+<meta name="twitter:image" content="https://poslednyzostrel.sk/assets/img/og-image.jpg">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="flink s. r. o.">
+<meta name="keywords" content="Posledný zostrel, Matej Beznák, Jakub Prokeš, kniha, letec SNP, Letov Š-328, Focke-Wulf Fw 189, dvojplošník, Slovenské národné povstanie, vojenská história, Takmer pravdivý príbeh">
+<meta property="og:site_name" content="Posledný zostrel">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Maľba súboja dvojplošníka Letov Š-328 s nemeckým Focke-Wulf Fw 189">
+<meta property="book:author" content="Jakub Prokeš">
+<meta property="book:isbn" content="978-80-975299-0-1">
+<link rel="preload" as="image" href="assets/img/kniha-mockup.jpg" fetchpriority="high">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/img/icon-512.png">
@@ -22,17 +35,92 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Book",
-  "name": "Posledný zostrel",
-  "author": [{"@type": "Person", "name": "Jakub Prokeš"}, {"@type": "Person", "name": "Matej Beznák"}],
-  "publisher": {"@type": "Organization", "name": "flink s. r. o."},
-  "datePublished": "2026",
-  "inLanguage": "sk",
-  "numberOfPages": 328,
-  "isbn": "978-80-975299-0-1",
-  "bookFormat": "https://schema.org/Hardcover",
-  "image": "assets/img/kniha-mockup.jpg",
-  "offers": {"@type": "Offer", "url": "https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&utm_medium=social&utm_campaign=posledny&utm_content=5516", "priceCurrency": "EUR"}
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://poslednyzostrel.sk/#website",
+      "url": "https://poslednyzostrel.sk/",
+      "name": "Posledný zostrel",
+      "inLanguage": "sk",
+      "publisher": {"@id": "https://poslednyzostrel.sk/#publisher"}
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://poslednyzostrel.sk/#publisher",
+      "name": "flink s. r. o.",
+      "url": "https://poslednyzostrel.sk/",
+      "logo": "https://poslednyzostrel.sk/assets/img/icon-512.png",
+      "address": {"@type": "PostalAddress", "streetAddress": "Eisnerova 35", "postalCode": "841 07", "addressLocality": "Bratislava", "addressCountry": "SK"},
+      "vatID": "SK2122282767"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://poslednyzostrel.sk/matej-beznak#person",
+      "name": "Matej Beznák",
+      "url": "https://poslednyzostrel.sk/matej-beznak",
+      "birthDate": "1921",
+      "deathDate": "1997",
+      "nationality": "SK",
+      "jobTitle": "vojenský letec, pozorovateľ Kombinovanej letky",
+      "description": "Slovenský vojenský letec a hrdina SNP. 7. septembra 1944 zostrelil ako pozorovateľ z dvojplošníka Letov Š-328 nemecké lietadlo Focke-Wulf Fw 189 – zrejme posledný zostrel z dvojplošníka v 2. svetovej vojne.",
+      "image": "https://poslednyzostrel.sk/assets/img/strana-05.jpg"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://poslednyzostrel.sk/#prokes",
+      "name": "Jakub Prokeš",
+      "jobTitle": "novinár a publicista",
+      "description": "Bývalý šéfredaktor denníka Pravda (2019 – 2022), držiteľ Ceny SAV za popularizáciu vedy a techniky, autor kníh Posledný zostrel, Takmer pravdivý príbeh a Vincent Hložník."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://poslednyzostrel.sk/#book",
+      "name": "Posledný zostrel",
+      "alternateName": "Takmer pravdivý príbeh (2. doplnené vydanie)",
+      "url": "https://poslednyzostrel.sk/",
+      "author": [{"@id": "https://poslednyzostrel.sk/#prokes"}, {"@id": "https://poslednyzostrel.sk/matej-beznak#person"}],
+      "about": {"@id": "https://poslednyzostrel.sk/matej-beznak#person"},
+      "publisher": {"@id": "https://poslednyzostrel.sk/#publisher"},
+      "datePublished": "2026-09",
+      "inLanguage": "sk",
+      "numberOfPages": 328,
+      "isbn": "978-80-975299-0-1",
+      "bookEdition": "2., doplnené vydanie",
+      "bookFormat": "https://schema.org/Hardcover",
+      "genre": ["vojenská história", "biografia", "literatúra faktu"],
+      "keywords": "Matej Beznák, SNP, Letov Š-328, Focke-Wulf Fw 189, slovenskí letci, Kombinovaná letka, Tri Duby",
+      "image": "https://poslednyzostrel.sk/assets/img/kniha-mockup.jpg",
+      "offers": {"@type": "Offer", "url": "https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&utm_medium=social&utm_campaign=posledny&utm_content=5516", "priceCurrency": "EUR", "price": "29.90", "availability": "https://schema.org/InStock", "seller": {"@type": "Organization", "name": "Vydavateľstvo Lúč"}, "shippingDetails": {"@type": "OfferShippingDetails", "shippingRate": {"@type": "MonetaryAmount", "value": "0", "currency": "EUR"}, "shippingDestination": {"@type": "DefinedRegion", "addressCountry": "SK"}}}
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Matej Beznák to dokázal – video o knihe Posledný zostrel",
+      "description": "Krátke video o knihe: 250 unikátnych fotografií, mapy Luftwaffe, bokorysy lietadiel.",
+      "thumbnailUrl": "https://poslednyzostrel.sk/assets/img/video-poster-kolaz.jpg",
+      "uploadDate": "2026-06-02",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/wMm-64nvZxI",
+      "contentUrl": "https://youtube.com/shorts/wMm-64nvZxI"
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Reportáž RTVS: Výnimočný príbeh slovenského letca Mateja Beznáka",
+      "description": "Reportáž z krstu knihy Posledný zostrel na Medzinárodných leteckých dňoch IMAD 2026 v Piešťanoch.",
+      "thumbnailUrl": "https://poslednyzostrel.sk/assets/img/rtvs-thumb.jpg",
+      "uploadDate": "2026-09-21",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/fd_BDC10NKk",
+      "contentUrl": "https://www.youtube.com/watch?v=fd_BDC10NKk"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Kto bol Matej Beznák?", "acceptedAnswer": {"@type": "Answer", "text": "Matej Beznák (1921 – 1997) bol slovenský vojenský letec z Trenčianskych Teplíc a hrdina Slovenského národného povstania. Ako pozorovateľ Kombinovanej letky zostrelil 7. septembra 1944 zo zastaraného dvojplošníka Letov Š-328 moderné nemecké prieskumné lietadlo Focke-Wulf Fw 189."}},
+        {"@type": "Question", "name": "Prečo sa hovorí o poslednom zostrele z dvojplošníka?", "acceptedAnswer": {"@type": "Answer", "text": "Beznákov zostrel Fw 189 zo 7. septembra 1944 je podľa historikov zrejme posledný zdokumentovaný zostrel lietadla z dvojplošníka počas druhej svetovej vojny na svete."}},
+        {"@type": "Question", "name": "Čo obsahuje kniha Posledný zostrel?", "acceptedAnswer": {"@type": "Answer", "text": "328 strán, vyše 250 dobových fotografií (mnohé publikované prvýkrát), tajné mapy nemeckej Luftwaffe, farebné bokorysy lietadiel a spomienky ďalších slovenských letcov – Jána Režňáka, Gustáva Kuboviča, Imricha Štosela a Mikuláša Šingloviča. Ide o druhé, doplnené vydanie knihy Takmer pravdivý príbeh z roku 1997."}},
+        {"@type": "Question", "name": "Kde sa dá kniha kúpiť a koľko stojí?", "acceptedAnswer": {"@type": "Answer", "text": "Knihu Posledný zostrel kúpite v e-shope vydavateľstva Lúč za 29,90 € s dopravou zdarma už od jedného kusu. Pri nákupe dvoch a viac kusov je zľava 15 %."}},
+        {"@type": "Question", "name": "Kto je autorom knihy?", "acceptedAnswer": {"@type": "Answer", "text": "Autorom je novinár a publicista Jakub Prokeš, bývalý šéfredaktor denníka Pravda, spoluautorom je sám Matej Beznák, ktorého spomienky kniha prináša. Maľbu súboja na obálke vytvoril Pavol Sluka."}}
+      ]
+    }
+  ]
 }
 </script>
 <style>
@@ -248,6 +336,15 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .launch p { color: #4a4542; }
 @media (max-width: 760px) { .launch { grid-template-columns: 1fr; } }
 
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 820px; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 0 20px; }
+.faq summary { cursor: pointer; list-style: none; padding: 16px 0; font: 600 1.05rem/1.3 var(--font-display); color: #000; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--sand); color: var(--ink-brown); display: grid; place-items: center; font: 500 1.1rem/1 var(--font-body); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin: 0; padding: 0 0 18px; color: #3a3532; max-width: 70ch; }
+
 /* Press list */
 .press-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
 .press-list li { border-top: 1px solid var(--line); }
@@ -305,6 +402,7 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
       <a href="#video">Video</a>
       <a href="#ukazky">Ukážky</a>
       <a href="#media">Médiá</a>
+      <a href="#faq">Otázky</a>
     </nav>
     <a class="btn" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=5516" target="_blank" rel="noopener">Kúpiť knihu</a>
   </div>
@@ -361,7 +459,7 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
     <div class="wrap about">
       <div>
         <p class="eyebrow">O knihe</p>
-        <h2>Aj Slováci písali svetové dejiny</h2>
+        <h2>Aj Slováci písali svetové dejiny: kniha o letcovi Matejovi Beznákovi</h2>
         <div class="prose">
           <p class="lede">Matej Beznák – legendárny slovenský vojenský letec a hrdina Slovenského národného povstania – sa do dejín letectva zapísal zrejme posledným zostrelom lietadla z dvojplošníka počas druhej svetovej vojny.</p>
           <p>Táto výnimočná publikácia približuje život a bojové osudy jedného z najvýznamnejších slovenských vojenských letcov 20. storočia. Prvé vydanie z roku 1997 sa rýchlo rozchytalo a zohnať ho dnes je takmer nemožné. Nové vydanie príbeh dopĺňa, vizuálne obohacuje a sprístupňuje širokej verejnosti.</p>
@@ -403,7 +501,7 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
     <div class="wrap">
       <div class="story-head">
         <p class="eyebrow">Príbeh</p>
-        <h2>7. septembra 1944 nad stredným Slovenskom</h2>
+        <h2>7. septembra 1944: posledný zostrel z dvojplošníka</h2>
       </div>
       <figure class="painting">
         <img src="assets/img/malba-suboj.jpg" srcset="assets/img/malba-suboj-1200.jpg 1200w, assets/img/malba-suboj.jpg 2400w" sizes="(max-width: 1212px) 100vw, 1180px" width="2400" height="1758" alt="Rekonštrukcia súboja: povstalecký dvojplošník Letov Š-328 a horiaci nemecký Focke-Wulf Fw 189" loading="lazy">
@@ -547,6 +645,37 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
     </div>
   </section>
 
+  <section class="section" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="story-head">
+        <p class="eyebrow">Časté otázky</p>
+        <h2>Matej Beznák a posledný zostrel z dvojplošníka</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>Kto bol Matej Beznák?</summary>
+          <p>Matej Beznák (1921 – 1997) bol slovenský vojenský letec z Trenčianskych Teplíc a hrdina Slovenského národného povstania. Ako pozorovateľ Kombinovanej letky zostrelil 7. septembra 1944 zo zastaraného dvojplošníka Letov Š-328 moderné nemecké prieskumné lietadlo Focke-Wulf Fw 189. <a href="matej-beznak">Prečítajte si jeho životopis.</a></p>
+        </details>
+        <details>
+          <summary>Prečo sa hovorí o poslednom zostrele z dvojplošníka?</summary>
+          <p>Beznákov zostrel Fw 189 zo 7. septembra 1944 je podľa historikov zrejme posledný zdokumentovaný zostrel lietadla z dvojplošníka počas druhej svetovej vojny na svete. Plátenný Letov Š-328 s dvoma guľometmi pozorovateľa porazil o generáciu modernejší stroj.</p>
+        </details>
+        <details>
+          <summary>Čo obsahuje kniha Posledný zostrel?</summary>
+          <p>328 strán, vyše 250 dobových fotografií (mnohé publikované prvýkrát), tajné mapy nemeckej Luftwaffe, farebné bokorysy lietadiel a spomienky ďalších slovenských letcov – Jána Režňáka, Gustáva Kuboviča, Imricha Štosela a Mikuláša Šingloviča. Ide o druhé, doplnené vydanie knihy Takmer pravdivý príbeh z roku 1997.</p>
+        </details>
+        <details>
+          <summary>Kde sa dá kniha kúpiť a koľko stojí?</summary>
+          <p>Knihu kúpite v <a href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=5516" target="_blank" rel="noopener">e-shope vydavateľstva Lúč</a> za 29,90 € s dopravou zdarma už od jedného kusu. Pri nákupe dvoch a viac kusov je zľava 15 %.</p>
+        </details>
+        <details>
+          <summary>Kto je autorom knihy?</summary>
+          <p>Novinár a publicista Jakub Prokeš, bývalý šéfredaktor denníka Pravda; spoluautorom je sám Matej Beznák, ktorého spomienky kniha prináša. Maľbu súboja na obálke vytvoril Pavol Sluka.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="media" style="padding-top:0">
     <div class="wrap">
       <div class="story-head">
@@ -610,7 +739,7 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
     <div class="footer-grid">
       <div>
         <h3>Posledný zostrel</h3>
-        <p>Jakub Prokeš, Matej Beznák. Druhé, doplnené vydanie knihy Takmer pravdivý príbeh (1997).<br>ISBN 978-80-975299-0-1</p>
+        <p>Jakub Prokeš, Matej Beznák. Druhé, doplnené vydanie knihy Takmer pravdivý príbeh (1997).<br>ISBN 978-80-975299-0-1<br><a href="matej-beznak">Životopis Mateja Beznáka</a></p>
       </div>
       <div>
         <h3>Vydavateľ a prevádzkovateľ webu</h3>
