@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Posledný zostrel</title>
+<meta name="description" content="Posledný zostrel – strhujúce spomienky slovenskej leteckej legendy Mateja Beznáka. Druhé, doplnené vydanie kultovej knihy Takmer pravdivý príbeh. 328 strán, vyše 250 dobových fotografií.">
+<meta property="og:type" content="book">
+<meta property="og:title" content="Posledný zostrel – Matej Beznák, Jakub Prokeš">
+<meta property="og:description" content="Slovenský letec, ktorý 7. septembra 1944 zostrelil z plátenného dvojplošníka moderné nemecké lietadlo. Kniha o poslednom zostrele z dvojplošníka v 2. svetovej vojne.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+<meta property="og:locale" content="sk_SK">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%232A1D19'/%3E%3Cpath d='M10 30h44M14 38h36M32 22v24M26 46h12' stroke='%23BC975B' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Roboto:wght@400;500;700&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Posledný zostrel",
+  "author": [{"@type": "Person", "name": "Jakub Prokeš"}, {"@type": "Person", "name": "Matej Beznák"}],
+  "publisher": {"@type": "Organization", "name": "flink s. r. o."},
+  "datePublished": "2026",
+  "inLanguage": "sk",
+  "numberOfPages": 328,
+  "isbn": "978-80-975299-0-1",
+  "bookFormat": "https://schema.org/Hardcover",
+  "image": "assets/img/kniha-mockup.jpg",
+  "offers": {"@type": "Offer", "url": "https://www.luc.sk/posledny-zostrel/", "priceCurrency": "EUR"}
+}
+</script>
+<style>
+/* Layout: e-shop vydavateľstva Lúč – béžový podklad, biele karty, sivý banner s knihou, rad výhod v kruhoch, parametre ako na produktovej stránke. */
+:root {
+  --bg: #F5F3EF;          /* béžový podklad (luc.sk) */
+  --surface: #FFFFFF;
+  --sand: #E8E4DB;        /* päta a kruhy výhod (luc.sk) */
+  --ink: #242424;
+  --ink-brown: #2A1D19;
+  --muted: #6B625C;
+  --line: #DEDAD2;
+  --green: #079E68;       /* konverzné tlačidlo (luc.sk) */
+  --green-dark: #057F53;
+  --gold: #BC975B;        /* zlatý akcent (luc.sk) */
+  --red: #D7262E;         /* štítok NOVINKA */
+  --banner-a: #D6D5D1;
+  --banner-b: #BEBDB8;
+  --font-display: "Noto Serif", Georgia, "Times New Roman", serif;
+  --font-body: Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 6px;
+  --radius-lg: 14px;
+  --wrap: 1180px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--green-dark); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.035em; color: #000; text-wrap: balance; margin: 0; line-height: 1.15; }
+h2 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem); }
+h3 { font-size: 1.15rem; letter-spacing: -0.02em; }
+p { margin: 0; }
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.section { padding-block: clamp(48px, 6vw, 88px); }
+.eyebrow { font: 500 0.78rem/1.2 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+.lede { font-size: 1.1rem; color: var(--ink); max-width: 62ch; }
+.prose { display: grid; gap: 1em; max-width: 66ch; }
+.prose p { color: #3a3532; }
+
+/* Buttons – rovnako ako na luc.sk */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 20px;
+  border-radius: var(--radius); border: 1px solid var(--green);
+  background: var(--green); color: #fff;
+  font: 500 0.95rem/1 var(--font-body); text-decoration: none; cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+.btn:hover { background: var(--green-dark); border-color: var(--green-dark); }
+.btn--ghost { background: var(--surface); color: var(--ink-brown); border-color: var(--line); }
+.btn--ghost:hover { background: var(--sand); border-color: var(--sand); }
+.btn--gold { background: var(--gold); border-color: var(--gold); }
+.btn--gold:hover { background: #a7834b; border-color: #a7834b; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.flag { display: inline-block; padding: 4px 8px; border-radius: 4px; background: var(--red); color: #fff; font: 700 0.7rem/1 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.site-header.is-scrolled { border-bottom-color: var(--line); }
+.site-header .wrap { display: flex; align-items: center; gap: 24px; min-height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-brown); }
+.brand-mark { width: 34px; height: 34px; flex: none; }
+.brand-name { font: 700 1.2rem/1 var(--font-display); letter-spacing: -0.03em; }
+.nav { display: flex; gap: 22px; margin-left: auto; }
+.nav a { color: var(--ink-brown); text-decoration: none; font-size: 0.95rem; }
+.nav a:hover { color: var(--green-dark); }
+.site-header .btn { min-height: 40px; padding: 0 16px; }
+@media (max-width: 880px) { .nav { display: none; } .site-header .btn { margin-left: auto; } }
+
+/* Hero banner */
+.hero { padding-block: 8px 0; }
+.banner {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center;
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: radial-gradient(120% 140% at 70% 10%, var(--banner-a), var(--banner-b));
+}
+.banner-copy { padding: clamp(28px, 5vw, 64px); display: grid; gap: 18px; justify-items: start; min-width: 0; }
+.banner-copy .authors { font: 500 0.95rem/1.3 var(--font-body); color: var(--ink-brown); letter-spacing: 0.02em; }
+.banner h1 { font-size: clamp(2.6rem, 1.6rem + 4.4vw, 4.6rem); font-weight: 700; color: #1b1b1b; line-height: 1; }
+.banner .sub { font: 400 clamp(1.1rem, 1rem + .5vw, 1.35rem)/1.35 var(--font-display); color: #2f2f2f; max-width: 30ch; }
+.banner .edition { font-size: 0.95rem; color: #3d3b38; max-width: 42ch; }
+.banner .edition em { font-style: italic; font-family: var(--font-display); }
+.banner-actions { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 6px; }
+.banner-media { align-self: stretch; min-height: 320px; }
+.banner-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+@media (max-width: 820px) {
+  .banner { grid-template-columns: 1fr; }
+  .banner-media { order: -1; min-height: 0; aspect-ratio: 1400 / 1008; }
+}
+
+/* Benefits row – kruhy ako na luc.sk */
+.benefits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; padding-block: 40px 8px; }
+.benefit { display: grid; justify-items: center; text-align: center; gap: 12px; }
+.benefit-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; color: var(--ink-brown); }
+.benefit-icon svg { width: 30px; height: 30px; }
+.benefit strong { font: 600 1.25rem/1.1 var(--font-display); color: #000; display: block; font-variant-numeric: tabular-nums; }
+.benefit span { font-size: 0.92rem; color: #4a4542; line-height: 1.35; max-width: 22ch; display: block; }
+@media (max-width: 760px) { .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; } }
+
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.about h2 { margin-bottom: 18px; }
+.checklist { background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--line); }
+.checklist ul { list-style: none; margin: 0; padding: 8px 0 0; }
+.checklist li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 16px 20px; border-top: 1px solid var(--line); }
+.checklist svg { width: 22px; height: 22px; color: var(--green); margin-top: 2px; }
+.checklist h3 { font-size: 1.25rem; padding: 20px 20px 4px; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+/* Press feature – Historická revue */
+.press-feature { background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--line); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+.press-feature figure { margin: 0; position: relative; min-height: 280px; }
+.press-feature figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 40%; }
+.press-feature .press-body { padding: clamp(24px, 4vw, 48px); display: grid; gap: 16px; align-content: center; justify-items: start; }
+.press-source { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.press-source b { font: 700 1.05rem/1 var(--font-display); color: var(--ink-brown); letter-spacing: -0.01em; }
+.press-source time { font-size: 0.85rem; color: var(--muted); }
+.press-feature h3 { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); line-height: 1.2; letter-spacing: -0.03em; }
+.press-feature p { color: #4a4542; max-width: 52ch; }
+@media (max-width: 820px) { .press-feature { grid-template-columns: 1fr; } .press-feature figure { min-height: 0; aspect-ratio: 16 / 10; } }
+
+/* Story */
+.story-head { display: grid; gap: 12px; margin-bottom: 28px; max-width: 760px; }
+.painting { margin: 0 0 40px; }
+.painting img { width: 100%; border-radius: var(--radius-lg); aspect-ratio: 2400 / 1758; object-fit: cover; background: var(--sand); }
+.painting figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+.story { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.params dl { margin: 0; }
+.params { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 8px 20px; margin: 0; }
+.params h3 { padding: 16px 0 8px; }
+.params div { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.params dt { color: var(--muted); font-size: 0.9rem; }
+.params dd { margin: 0; font-weight: 500; color: var(--ink-brown); }
+.medals { margin-top: 8px; padding: 18px 20px; background: var(--sand); border-radius: var(--radius-lg); font-size: 0.95rem; color: #3a3532; }
+.medals b { display: block; font: 600 1rem/1.3 var(--font-display); color: #000; margin-bottom: 6px; }
+@media (max-width: 860px) { .story { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .params div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Video */
+.video-band { background: var(--ink-brown); color: #EFE9E1; }
+.video-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.video-band h2 { color: #fff; }
+.video-band .eyebrow { color: var(--gold); }
+.video-band .prose p { color: #DCD4CA; }
+.script { font: italic 400 1.15rem/1.55 var(--font-display); color: #F4EEE6; border-left: 3px solid var(--gold); padding-left: 18px; max-width: 46ch; }
+.player { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: var(--radius-lg); overflow: hidden; background: #111; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+.player img, .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.player button { position: absolute; inset: 0; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.player .play { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 76px; height: 76px; border-radius: 50%; background: var(--green); display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.35); transition: transform .15s ease; }
+.player button:hover .play { transform: scale(1.06); }
+.player .play svg { width: 30px; height: 30px; color: #fff; margin-left: 4px; }
+.player .note { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgba(0,0,0,.7)); color: #fff; font-size: 0.85rem; text-align: center; }
+.video-link { display: inline-block; margin-top: 12px; color: #EFE9E1; font-size: 0.9rem; }
+@media (max-width: 760px) { .video-grid { grid-template-columns: 1fr; } .player { max-width: 360px; margin: 0 auto; } }
+
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.gallery button { border: 0; padding: 0; background: var(--surface); border-radius: var(--radius); overflow: hidden; cursor: zoom-in; box-shadow: 0 1px 2px rgba(42,29,25,.08), 0 6px 18px rgba(42,29,25,.08); transition: transform .2s ease; }
+.gallery button:hover { transform: translateY(-3px); }
+.gallery img { width: 100%; aspect-ratio: 1000 / 1464; object-fit: cover; }
+@media (max-width: 900px) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: min(92vw, 900px); max-height: 92vh; }
+dialog.lightbox::backdrop { background: rgba(20, 14, 12, .86); }
+dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radius: var(--radius); }
+.lb-bar { display: flex; justify-content: center; gap: 10px; padding-top: 12px; }
+.lb-bar button { min-height: 40px; padding: 0 16px; border-radius: var(--radius); border: 0; background: var(--surface); color: var(--ink-brown); font: 500 0.9rem var(--font-body); cursor: pointer; }
+
+/* Authors */
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.person { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; display: grid; gap: 10px; align-content: start; }
+.person .role { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); font-weight: 500; }
+.person h3 { font-size: 1.35rem; }
+.person p { color: #4a4542; font-size: 0.95rem; }
+.airmen { margin-top: 20px; font-size: 0.95rem; color: #4a4542; }
+@media (max-width: 900px) { .people { grid-template-columns: 1fr; } }
+
+/* Launch */
+.launch { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px 36px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 40px); }
+.launch-date { width: 104px; height: 104px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; text-align: center; color: var(--ink-brown); }
+.launch-date b { display: block; font: 700 1.5rem/1 var(--font-display); }
+.launch-date span { font-size: 0.75rem; letter-spacing: .06em; text-transform: uppercase; }
+.launch h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem); margin-bottom: 8px; }
+.launch p { color: #4a4542; }
+@media (max-width: 760px) { .launch { grid-template-columns: 1fr; } }
+
+/* Press list */
+.press-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.press-list li { border-top: 1px solid var(--line); }
+.press-list li:first-child { border-top: 0; }
+.press-list a { display: grid; grid-template-columns: 11rem minmax(0, 1fr) auto; gap: 6px 20px; align-items: baseline; padding: 18px 22px; text-decoration: none; color: inherit; }
+.press-list a:hover { background: #FBFAF7; }
+.press-list .src { font-weight: 700; color: var(--ink-brown); }
+.press-list .src small { display: block; font-weight: 400; color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+.press-list .ttl { font-family: var(--font-display); font-size: 1.05rem; color: #000; }
+.press-list .arrow { color: var(--green); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
+.press-list li.is-top a { background: #FBF7EF; }
+@media (max-width: 720px) { .press-list a { grid-template-columns: 1fr; } }
+
+/* Buy band */
+.buy { background: var(--sand); }
+.buy-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.buy-grid img { border-radius: var(--radius-lg); }
+.buy-grid .prose { gap: 16px; justify-items: start; }
+@media (max-width: 820px) { .buy-grid { grid-template-columns: 1fr; } }
+
+/* Footer / impressum */
+.site-footer { background: var(--sand); border-top: 1px solid #D8D2C6; padding-block: 40px; font-size: 0.9rem; color: #3a3532; }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+.site-footer h3 { font-size: 1rem; margin-bottom: 10px; }
+.site-footer address { font-style: normal; line-height: 1.7; }
+.site-footer a { color: var(--ink-brown); }
+.footnote { margin-top: 28px; padding-top: 18px; border-top: 1px solid #D8D2C6; color: var(--muted); font-size: 0.82rem; }
+@media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>
+
+</head>
+<body>
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Posledný zostrel – úvod">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="10" fill="#2A1D19"/><path d="M10 28h44M14 37h36M32 20v26M25 46h14" stroke="#BC975B" stroke-width="4" stroke-linecap="round" fill="none"/></svg>
+      <span class="brand-name">Posledný zostrel</span>
+    </a>
+    <nav class="nav" aria-label="Hlavná navigácia">
+      <a href="#o-knihe">O knihe</a>
+      <a href="#pribeh">Príbeh</a>
+      <a href="#video">Video</a>
+      <a href="#ukazky">Ukážky</a>
+      <a href="#media">Médiá</a>
+    </nav>
+    <a class="btn" href="https://www.luc.sk/posledny-zostrel/" target="_blank" rel="noopener">Kúpiť knihu</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="banner">
+        <div class="banner-copy">
+          <span class="flag">Novinka 2026</span>
+          <p class="authors">Matej Beznák · Jakub Prokeš</p>
+          <h1>Posledný zostrel</h1>
+          <p class="sub">Strhujúce spomienky slovenskej leteckej legendy</p>
+          <p class="edition">Druhé, doplnené vydanie kultovej knihy <em>Takmer pravdivý príbeh</em></p>
+          <div class="banner-actions">
+            <a class="btn" href="https://www.luc.sk/posledny-zostrel/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
+              Kúpiť knihu
+            </a>
+            <a class="btn btn--ghost" href="#video">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+              Pozrieť video
+            </a>
+          </div>
+        </div>
+        <div class="banner-media">
+          <img src="assets/img/kniha-mockup.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel – pevná väzba, na obálke maľba dvojplošníka Letov Š-328">
+        </div>
+      </div>
+
+      <div class="benefits" role="list">
+        <div class="benefit" role="listitem">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></div>
+          <div><strong>328 strán</strong><span>pútavého čítania o živote a bojoch</span></div>
+        </div>
+        <div class="benefit" role="listitem">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 8"/></svg></div>
+          <div><strong>250+ fotografií</strong><span>dobových, mnohé publikované prvý raz</span></div>
+        </div>
+        <div class="benefit" role="listitem">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div>
+          <div><strong>Mapy Luftwaffe</strong><span>a farebné bokorysy lietadiel</span></div>
+        </div>
+        <div class="benefit" role="listitem">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>
+          <div><strong>Overené odborníkmi</strong><span>výskum popredných vojenských historikov</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="o-knihe">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">O knihe</p>
+        <h2>Aj Slováci písali svetové dejiny</h2>
+        <div class="prose">
+          <p class="lede">Matej Beznák – legendárny slovenský vojenský letec a hrdina Slovenského národného povstania – sa do dejín letectva zapísal zrejme posledným zostrelom lietadla z dvojplošníka počas druhej svetovej vojny.</p>
+          <p>Táto výnimočná publikácia približuje život a bojové osudy jedného z najvýznamnejších slovenských vojenských letcov 20. storočia. Prvé vydanie z roku 1997 sa rýchlo rozchytalo a zohnať ho dnes je takmer nemožné. Nové vydanie príbeh dopĺňa, vizuálne obohacuje a sprístupňuje širokej verejnosti.</p>
+          <p>Nejde len o suché fakty. Sú to živé spomienky na vojnu, kamarátov a lásky, a najmä na súvislosti, ktoré mnohé objasňujú. Kniha vychádza aj pri príležitosti výročia SNP a konca 2. svetovej vojny.</p>
+        </div>
+      </div>
+      <div class="checklist">
+        <h3>Čo v knihe nájdete?</h3>
+        <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>viac ako 300 strán pútavého čítania</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>vyše 250 dobových fotografií a archívnych dokumentov, mnohé publikované vôbec po prvý raz</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>atraktívne farebné bokorysy lietadiel a historické letecké mapy Luftwaffe</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>spomienky ďalších letcov – Jána Režňáka, Gustáva Kuboviča, Imricha Štosela, Mikuláša Šingloviča</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>výsledky výskumu popredných odborníkov na vojenskú históriu</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0" aria-labelledby="hr-title">
+    <div class="wrap">
+      <article class="press-feature">
+        <figure>
+          <img src="assets/img/malba-suboj-1200.jpg" alt="Maľba súboja dvojplošníka Letov Š-328 s nemeckým Focke-Wulf Fw 189" loading="lazy">
+        </figure>
+        <div class="press-body">
+          <p class="eyebrow">Napísali o nás</p>
+          <div class="press-source"><b>Historická revue SME</b><time datetime="2026-09-10">10. septembra 2026</time></div>
+          <h3 id="hr-title">Unikátny hrdina SNP Matej Beznák: Zostrelil nemecké lietadlo z plátenného dvojplošníka</h3>
+          <p>Septembrové vydanie magazínu Historická revue prinieslo rozhovor Tomáša Mrvu s autorom knihy Jakubom Prokešom o pohnutom osude povstaleckého letca pred zostrelom aj po ňom.</p>
+          <a class="btn btn--gold" href="https://www.sme.sk/historicka-revue/c/unikatny-hrdina-snp-matej-beznak-zostrelil-nemecke-lietadlo-z-platenneho-dvojplosnika" target="_blank" rel="noopener">Čítať článok v Historickej revue</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="pribeh" style="padding-top:0">
+    <div class="wrap">
+      <div class="story-head">
+        <p class="eyebrow">Príbeh</p>
+        <h2>7. septembra 1944 nad stredným Slovenskom</h2>
+      </div>
+      <figure class="painting">
+        <img src="assets/img/malba-suboj.jpg" srcset="assets/img/malba-suboj-1200.jpg 1200w, assets/img/malba-suboj.jpg 2400w" sizes="(max-width: 1212px) 100vw, 1180px" width="2400" height="1758" alt="Rekonštrukcia súboja: povstalecký dvojplošník Letov Š-328 a horiaci nemecký Focke-Wulf Fw 189" loading="lazy">
+        <figcaption>Rekonštrukcia súboja povstaleckého Letova Š-328 s nemeckým Focke-Wulf Fw 189. Maľba z knihy, autor Pavol Sluka.</figcaption>
+      </figure>
+      <div class="story">
+        <div class="prose">
+          <p class="lede">Mateja Beznáka preslávil víťazný súboj proti modernému nemeckému lietadlu Focke-Wulf Fw 189. Ako pozorovateľ Kombinovanej letky ho poslal k zemi zo zastaraného plátenného dvojplošníka Letov Š-328, ktorý letci volali „kravička“.</p>
+          <p>Beznák mal vtedy 23 rokov a patril medzi najtalentovanejších mladých letcov. Ako príslušník slovenských vzdušných zbraní sa pred SNP zúčastnil preškolenia na nemecké bombardéry Heinkel He 111 v Saki na Kryme. Vybrali ho aj na špeciálny výcvik dvoch najlepších slovenských posádok v Greifswalde na severe Nemecka, v elitnej škole Luftwaffe pre posádky bombardérov.</p>
+          <p>Je tiež jediným Slovákom, ktorý počas druhej svetovej vojny zažil strmhlavý let nad Peenemünde – tajnou základňou, kde Nemci vyvíjali svoje „zázračné zbrane“, rakety V-1 a V-2. O tom všetkom sa dočítate v knihe.</p>
+          <div class="medals">
+            <b>Vyznamenania</b>
+            Rad SNP I. triedy, Československý vojnový kríž 1939, dvakrát Československá medaila Za chrabrosť pred nepriateľom, Československá vojenská medaila Za zásluhy a ďalšie vyznamenania a pamätné medaily.
+          </div>
+        </div>
+        <div class="params">
+          <h3>Záznam o zostrele</h3>
+          <dl>
+          <div><dt>Dátum</dt><dd>7. septembra 1944</dd></div>
+          <div><dt>Útvar</dt><dd>Kombinovaná letka, letisko Tri Duby</dd></div>
+          <div><dt>Lietadlo</dt><dd>Letov Š-328 „kravička“, plátenný dvojplošník</dd></div>
+          <div><dt>Funkcia</dt><dd>pozorovateľ</dd></div>
+          <div><dt>Protivník</dt><dd>Focke-Wulf Fw 189</dd></div>
+          <div><dt>Vek</dt><dd>23 rokov</dd></div>
+          <div><dt>Význam</dt><dd>zrejme posledný zdokumentovaný zostrel z dvojplošníka v 2. svetovej vojne</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section video-band" id="video">
+    <div class="wrap video-grid">
+      <div class="prose">
+        <p class="eyebrow">Video</p>
+        <h2>Matej Beznák to dokázal</h2>
+        <p class="script">Rok 1944. Mladý slovenský letec, zastaraný dvojplošník. A oproti nemu obávané moderné nemecké lietadlo.</p>
+        <p>Pozrite si krátke video o knihe: vyše 250 unikátnych fotografií, tajné mapy nemeckej Luftwaffe, atraktívne bokorysy lietadiel a texty redigované odborníkmi na vojenskú históriu pod taktovkou autora Jakuba Prokeša.</p>
+      </div>
+      <div>
+        <div class="player" id="player">
+          <img src="assets/img/video-poster.jpg" alt="" aria-hidden="true">
+          <button type="button" id="play-btn" aria-label="Prehrať video o knihe Posledný zostrel">
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+            <span class="note">Video sa načíta z YouTube po kliknutí</span>
+          </button>
+        </div>
+        <a class="video-link" href="https://youtube.com/shorts/wMm-64nvZxI" target="_blank" rel="noopener">Otvoriť video na YouTube ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ukazky">
+    <div class="wrap">
+      <div class="story-head">
+        <p class="eyebrow">Ukážky</p>
+        <h2>Nahliadnite do knihy</h2>
+      </div>
+      <div class="gallery" id="gallery">
+        <button type="button" data-i="0"><img src="assets/img/strana-04.jpg" alt="Strana s dobovými fotografiami, dvojplošník S-76" loading="lazy"></button>
+        <button type="button" data-i="1"><img src="assets/img/strana-10.jpg" alt="Portrét mladého Mateja Beznáka" loading="lazy"></button>
+        <button type="button" data-i="2"><img src="assets/img/strana-03.jpg" alt="Posádky pred bombardérom Heinkel He 111" loading="lazy"></button>
+        <button type="button" data-i="3"><img src="assets/img/strana-12.jpg" alt="Navigačná mapa Luftwaffe" loading="lazy"></button>
+        <button type="button" data-i="4"><img src="assets/img/strana-05.jpg" alt="Matej Beznák s vyznamenaniami, fotografia z roku 1946" loading="lazy"></button>
+        <button type="button" data-i="5"><img src="assets/img/strana-07.jpg" alt="Venovanie slovenským letcom" loading="lazy"></button>
+        <button type="button" data-i="6"><img src="assets/img/strana-11.jpg" alt="Kapitola Niečo sa chystá" loading="lazy"></button>
+        <button type="button" data-i="7"><img src="assets/img/strana-14.jpg" alt="Strana s dobovými fotografiami" loading="lazy"></button>
+        <button type="button" data-i="8"><img src="assets/img/strana-13.jpg" alt="Resumé knihy" loading="lazy"></button>
+        <button type="button" data-i="9"><img src="assets/img/strana-06.jpg" alt="Letci na stretnutí veteránov" loading="lazy"></button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Ukážka z knihy">
+    <img id="lb-img" src="" alt="">
+    <div class="lb-bar">
+      <button type="button" id="lb-prev">← Predchádzajúca</button>
+      <button type="button" id="lb-close">Zavrieť</button>
+      <button type="button" id="lb-next">Ďalšia →</button>
+    </div>
+  </dialog>
+
+  <section class="section" id="autori" style="padding-top:0">
+    <div class="wrap">
+      <div class="story-head">
+        <p class="eyebrow">Autori</p>
+        <h2>Kto za knihou stojí</h2>
+      </div>
+      <div class="people">
+        <article class="person">
+          <span class="role">Hrdina a spoluautor</span>
+          <h3>Matej Beznák <span style="font-weight:400;color:var(--muted)">(1921 – 1997)</span></h3>
+          <p>Slovenský vojenský letec, účastník SNP a pozorovateľ povstaleckej Kombinovanej letky. Jeho spomienky vyšli prvý raz v roku 1997 v knihe Takmer pravdivý príbeh.</p>
+        </article>
+        <article class="person">
+          <span class="role">Autor</span>
+          <h3>Jakub Prokeš</h3>
+          <p>Novinár a publicista, v rokoch 2019 – 2022 šéfredaktor denníka Pravda. Prednáša na vysokých školách a je držiteľom Ceny SAV za popularizáciu vedy a techniky. Knihy podpisuje s osobným venovaním.</p>
+        </article>
+        <article class="person">
+          <span class="role">Ilustrácia</span>
+          <h3>Pavol Sluka</h3>
+          <p>Autor maľby legendárneho súboja Letova Š-328 s Focke-Wulf Fw 189 – novej, doteraz nezverejnenej rekonštrukcie, ktorá zdobí knihu.</p>
+        </article>
+      </div>
+      <p class="airmen">Na knihe pracovalo viac ako 15 autorov, korektorov, grafikov a lektorov. Jej vydanie podporili a obsah posúdili odborníci vrátane Vojenského historického ústavu, poprední zberatelia a leteckí modelári.</p>
+    </div>
+  </section>
+
+  <section class="section" id="krst" style="padding-top:0">
+    <div class="wrap">
+      <div class="launch">
+        <div class="launch-date" aria-hidden="true"><div><b>11:15</b><span>IMAD 2026</span></div></div>
+        <div>
+          <p class="eyebrow">Krst knihy</p>
+          <h2>IMAD Piešťany 2026</h2>
+          <p>Krst knihy o 11:15 za účasti náčelníka Generálneho štábu OS SR generála Miroslava Lorinca. Na podujatí si budete môcť kúpiť knihu so zľavou, s podpisom autora a venovaním.</p>
+        </div>
+        <a class="btn btn--ghost" href="https://www.luc.sk/posledny-zostrel/" target="_blank" rel="noopener">Kúpiť online</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="media" style="padding-top:0">
+    <div class="wrap">
+      <div class="story-head">
+        <p class="eyebrow">Médiá</p>
+        <h2>Napísali o Matejovi Beznákovi</h2>
+      </div>
+      <ul class="press-list">
+        <li class="is-top"><a href="https://www.sme.sk/historicka-revue/c/unikatny-hrdina-snp-matej-beznak-zostrelil-nemecke-lietadlo-z-platenneho-dvojplosnika" target="_blank" rel="noopener">
+          <span class="src">Historická revue SME<small>10. 9. 2026 · Tomáš Mrva</small></span>
+          <span class="ttl">Unikátny hrdina SNP Matej Beznák: Zostrelil nemecké lietadlo z plátenného dvojplošníka</span>
+          <span class="arrow">Čítať ↗</span></a></li>
+        <li><a href="https://www.teraz.sk/slovensko/p-sumichrast-povstalecki-letci-boli/413355-clanok.html" target="_blank" rel="noopener">
+          <span class="src">TASR / teraz.sk<small>18. 8. 2019</small></span>
+          <span class="ttl">Vojenský historik: Povstaleckí letci boli skutoční hrdinovia</span>
+          <span class="arrow">Čítať ↗</span></a></li>
+        <li><a href="https://www.pravda.sk/spravy/domace/clanok/157844-zabudnuty-catar-navzdy-odletel-do-neba" target="_blank" rel="noopener">
+          <span class="src">Pravda<small>20. 5. 2008 · Jakub Prokeš</small></span>
+          <span class="ttl">Zabudnutý čatár navždy odletel do neba</span>
+          <span class="arrow">Čítať ↗</span></a></li>
+        <li><a href="https://www.valka.cz/Takmer-pravdivy-pribeh-Jakub-Prokes-Matej-Beznak-t31144" target="_blank" rel="noopener">
+          <span class="src">valka.cz<small>Databáza kníh</small></span>
+          <span class="ttl">Takmer pravdivý príbeh – Jakub Prokeš, Matej Beznák</span>
+          <span class="arrow">Otvoriť ↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section buy" id="kupit">
+    <div class="wrap buy-grid">
+      <img src="assets/img/kniha-mockup.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel" loading="lazy">
+      <div class="prose">
+        <p class="eyebrow">Kúpiť knihu</p>
+        <h2>Posledný zostrel si objednáte v e-shope Lúč</h2>
+        <p>Pevná väzba, 328 strán, vyše 250 dobových fotografií. Kniha, ktorá vracia do života kus našich dejín.</p>
+        <a class="btn" href="https://www.luc.sk/posledny-zostrel/" target="_blank" rel="noopener">Kúpiť na luc.sk</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Posledný zostrel</h3>
+        <p>Jakub Prokeš, Matej Beznák. Druhé, doplnené vydanie knihy Takmer pravdivý príbeh (1997).<br>ISBN 978-80-975299-0-1</p>
+      </div>
+      <div>
+        <h3>Vydavateľ a prevádzkovateľ webu</h3>
+        <address>
+          flink s. r. o.<br>
+          Eisnerova 35<br>
+          841 07 Bratislava – Devínska Nová Ves
+        </address>
+      </div>
+      <div>
+        <h3>Firemné údaje</h3>
+        <p>IČO: 56312253<br>DIČ: 2122282767<br>IČ DPH: SK2122282767</p>
+      </div>
+    </div>
+    <p class="footnote">© 2026 flink s. r. o. Fotografie: archív Mateja Beznáka, Jakub Prokeš, VHÚ, Múzeum SNP. Maľba: Pavol Sluka. Táto stránka nepoužíva cookies; video z YouTube sa načíta až po kliknutí.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Sticky header border
+  var header = document.querySelector('.site-header');
+  var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // YouTube – načítanie až po kliknutí (bez cookies vopred)
+  var VIDEO_ID = 'wMm-64nvZxI';
+  var btn = document.getElementById('play-btn');
+  btn.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0&playsinline=1';
+    f.title = 'Posledný zostrel – video o knihe';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    var p = document.getElementById('player');
+    p.innerHTML = ''; p.appendChild(f);
+  });
+
+  // Lightbox pre ukážky
+  var items = Array.prototype.slice.call(document.querySelectorAll('#gallery button'));
+  var dlg = document.getElementById('lightbox');
+  var img = document.getElementById('lb-img');
+  var cur = 0;
+  function show(i) {
+    cur = (i + items.length) % items.length;
+    var src = items[cur].querySelector('img');
+    img.src = src.getAttribute('src'); img.alt = src.alt;
+  }
+  items.forEach(function (b, i) {
+    b.addEventListener('click', function () {
+      show(i);
+      if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    });
+  });
+  document.getElementById('lb-prev').addEventListener('click', function () { show(cur - 1); });
+  document.getElementById('lb-next').addEventListener('click', function () { show(cur + 1); });
+  document.getElementById('lb-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+})();
+</script>
+
+</body>
+</html>
