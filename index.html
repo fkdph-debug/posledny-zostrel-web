@@ -8,7 +8,9 @@
 <meta property="og:type" content="book">
 <meta property="og:title" content="Posledný zostrel – Matej Beznák, Jakub Prokeš">
 <meta property="og:description" content="Slovenský letec, ktorý 7. septembra 1944 zostrelil z plátenného dvojplošníka moderné nemecké lietadlo. Kniha o poslednom zostrele z dvojplošníka v 2. svetovej vojne.">
-<meta property="og:image" content="assets/img/og-image.jpg">
+<meta property="og:image" content="https://poslednyzostrel.sk/assets/img/og-image.jpg">
+<meta property="og:url" content="https://poslednyzostrel.sk/">
+<link rel="canonical" href="https://poslednyzostrel.sk/">
 <meta property="og:locale" content="sk_SK">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%232A1D19'/%3E%3Cpath d='M10 30h44M14 38h36M32 22v24M26 46h12' stroke='%23BC975B' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -198,6 +200,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .player .play svg { width: 30px; height: 30px; color: #fff; margin-left: 4px; }
 .player .note { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgba(0,0,0,.7)); color: #fff; font-size: 0.85rem; text-align: center; }
 .video-link { display: inline-block; margin-top: 12px; color: #EFE9E1; font-size: 0.9rem; }
+.rtvs { margin-top: clamp(40px, 6vw, 72px); padding-top: clamp(32px, 5vw, 56px); border-top: 1px solid rgba(255,255,255,.14); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.player--wide { aspect-ratio: 16 / 9; }
+.player--wide .note { text-align: left; }
+@media (max-width: 860px) { .rtvs { grid-template-columns: 1fr; } .rtvs > div:first-child { order: 2; } }
 @media (max-width: 760px) { .video-grid { grid-template-columns: 1fr; } .player { max-width: 360px; margin: 0 auto; } }
 
 /* Gallery */
@@ -413,14 +419,33 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
         <p>Pozrite si krátke video o knihe: vyše 250 unikátnych fotografií, tajné mapy nemeckej Luftwaffe, atraktívne bokorysy lietadiel a texty redigované odborníkmi na vojenskú históriu pod taktovkou autora Jakuba Prokeša.</p>
       </div>
       <div>
-        <div class="player" id="player">
+        <div class="player" data-video="wMm-64nvZxI">
           <img src="assets/img/video-poster.jpg" alt="" aria-hidden="true">
-          <button type="button" id="play-btn" aria-label="Prehrať video o knihe Posledný zostrel">
+          <button type="button" class="play-btn" aria-label="Prehrať video o knihe Posledný zostrel">
             <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
             <span class="note">Video sa načíta z YouTube po kliknutí</span>
           </button>
         </div>
         <a class="video-link" href="https://youtube.com/shorts/wMm-64nvZxI" target="_blank" rel="noopener">Otvoriť video na YouTube ↗</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="rtvs">
+        <div>
+          <div class="player player--wide" data-video="fd_BDC10NKk">
+            <img src="assets/img/malba-suboj-1200.jpg" alt="" aria-hidden="true">
+            <button type="button" class="play-btn" aria-label="Prehrať reportáž RTVS o Matejovi Beznákovi">
+              <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+              <span class="note">Reportáž RTVS · video sa načíta z YouTube po kliknutí</span>
+            </button>
+          </div>
+          <a class="video-link" href="https://www.youtube.com/watch?v=fd_BDC10NKk" target="_blank" rel="noopener">Otvoriť reportáž na YouTube ↗</a>
+        </div>
+        <div class="prose">
+          <p class="eyebrow">Reportáž RTVS</p>
+          <h2>Výnimočný príbeh slovenského letca</h2>
+          <p>Reportáž RTVS z krstu knihy na Medzinárodných leteckých dňoch IMAD 2026 v Piešťanoch. O letcovi z Trenčianskych Teplíc, ktorý sa v roku 1944 stal hrdinom SNP.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -485,11 +510,11 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
   <section class="section" id="krst" style="padding-top:0">
     <div class="wrap">
       <div class="launch">
-        <div class="launch-date" aria-hidden="true"><div><b>11:15</b><span>IMAD 2026</span></div></div>
+        <div class="launch-date" aria-hidden="true"><div><b>2026</b><span>IMAD</span></div></div>
         <div>
           <p class="eyebrow">Krst knihy</p>
-          <h2>IMAD Piešťany 2026</h2>
-          <p>Krst knihy o 11:15 za účasti náčelníka Generálneho štábu OS SR generála Miroslava Lorinca. Na podujatí si budete môcť kúpiť knihu so zľavou, s podpisom autora a venovaním.</p>
+          <h2>Pokrstená na IMAD Piešťany 2026</h2>
+          <p>Kniha bola slávnostne uvedená na Medzinárodných leteckých dňoch v Piešťanoch za účasti náčelníka Generálneho štábu OS SR generála Miroslava Lorinca. Reportáž RTVS z krstu si pozrite vo <a href="#video">videu</a>.</p>
         </div>
         <a class="btn btn--ghost" href="https://www.luc.sk/posledny-zostrel/" target="_blank" rel="noopener">Kúpiť online</a>
       </div>
@@ -507,6 +532,10 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
           <span class="src">Historická revue SME<small>10. 9. 2026 · Tomáš Mrva</small></span>
           <span class="ttl">Unikátny hrdina SNP Matej Beznák: Zostrelil nemecké lietadlo z plátenného dvojplošníka</span>
           <span class="arrow">Čítať ↗</span></a></li>
+        <li><a href="https://www.youtube.com/watch?v=fd_BDC10NKk" target="_blank" rel="noopener">
+          <span class="src">RTVS<small>21. 9. 2026 · reportáž z krstu</small></span>
+          <span class="ttl">Výnimočný príbeh slovenského letca Mateja Beznáka</span>
+          <span class="arrow">Pozrieť ↗</span></a></li>
         <li><a href="https://www.teraz.sk/slovensko/p-sumichrast-povstalecki-letci-boli/413355-clanok.html" target="_blank" rel="noopener">
           <span class="src">TASR / teraz.sk<small>18. 8. 2019</small></span>
           <span class="ttl">Vojenský historik: Povstaleckí letci boli skutoční hrdinovia</span>
@@ -568,16 +597,15 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // YouTube – načítanie až po kliknutí (bez cookies vopred)
-  var VIDEO_ID = 'wMm-64nvZxI';
-  var btn = document.getElementById('play-btn');
-  btn.addEventListener('click', function () {
-    var f = document.createElement('iframe');
-    f.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0&playsinline=1';
-    f.title = 'Posledný zostrel – video o knihe';
-    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    f.allowFullscreen = true;
-    var p = document.getElementById('player');
-    p.innerHTML = ''; p.appendChild(f);
+  document.querySelectorAll('.player[data-video]').forEach(function (p) {
+    p.querySelector('.play-btn').addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + p.dataset.video + '?autoplay=1&rel=0&playsinline=1';
+      f.title = 'Posledný zostrel – video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      p.innerHTML = ''; p.appendChild(f);
+    });
   });
 
   // Lightbox pre ukážky
