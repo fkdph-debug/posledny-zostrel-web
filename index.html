@@ -13,7 +13,9 @@
 <link rel="canonical" href="https://poslednyzostrel.sk/">
 <meta property="og:locale" content="sk_SK">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%232A1D19'/%3E%3Cpath d='M10 30h44M14 38h36M32 22v24M26 46h12' stroke='%23BC975B' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/img/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Roboto:wght@400;500;700&display=swap">
@@ -258,6 +260,14 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .buy { background: var(--sand); }
 .buy-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
 .buy-grid img { border-radius: var(--radius-lg); }
+.gift { position: relative; border-radius: var(--radius-lg); overflow: hidden; }
+.gift img { display: block; width: 100%; }
+.ribbon { position: absolute; background: linear-gradient(90deg, #B5171F, #D9303A 50%, #B5171F); box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 6px 14px rgba(0,0,0,.18); }
+.ribbon-v { top: 4%; bottom: 7%; left: 50%; width: 6.5%; transform: translateX(-50%); border-radius: 3px; }
+.ribbon-h { left: 5%; right: 5%; top: 50%; height: 8.5%; border-radius: 3px; transform: translateY(-50%); background: linear-gradient(180deg, #B5171F, #D9303A 50%, #B5171F); }
+.bow { position: absolute; left: 50%; top: 50%; width: 26%; transform: translate(-50%, -52%); filter: drop-shadow(0 8px 12px rgba(0,0,0,.3)); }
+.gift-tag { position: absolute; left: 6%; bottom: 6%; padding: 8px 14px; background: #FFF8EE; color: var(--ink-brown); font: 500 0.85rem/1 var(--font-display); border: 1px solid #E6D9C5; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,.15); transform: rotate(-6deg); }
+.gift-tag::before { content: ""; position: absolute; left: -6px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: #E6D9C5; transform: translateY(-50%); }
 .buy-grid .prose { gap: 16px; justify-items: start; }
 .offers { display: grid; gap: 12px; width: 100%; max-width: 520px; }
 .offer { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; }
@@ -566,7 +576,22 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 
   <section class="section buy" id="kupit">
     <div class="wrap buy-grid">
-      <img src="assets/img/kniha-mockup.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel" loading="lazy">
+      <div class="gift">
+        <img src="assets/img/kniha-mockup.jpg" width="1400" height="1008" alt="Kniha Posledný zostrel zabalená ako darček" loading="lazy">
+        <span class="ribbon ribbon-v" aria-hidden="true"></span>
+        <span class="ribbon ribbon-h" aria-hidden="true"></span>
+        <svg class="bow" viewBox="0 0 120 90" aria-hidden="true">
+          <path d="M60 48 C40 20 8 18 10 40 C12 58 42 56 60 48 Z" fill="#C8202A"/>
+          <path d="M60 48 C80 20 112 18 110 40 C108 58 78 56 60 48 Z" fill="#C8202A"/>
+          <path d="M60 48 C48 60 30 80 36 86 C44 90 56 68 60 48 Z" fill="#A9161F"/>
+          <path d="M60 48 C72 60 90 80 84 86 C76 90 64 68 60 48 Z" fill="#A9161F"/>
+          <path d="M60 48 C44 32 20 30 20 40 C20 50 44 50 60 48 Z" fill="#E03540" opacity=".7"/>
+          <path d="M60 48 C76 32 100 30 100 40 C100 50 76 50 60 48 Z" fill="#E03540" opacity=".7"/>
+          <circle cx="60" cy="48" r="9" fill="#A9161F"/>
+          <circle cx="60" cy="48" r="5" fill="#E03540"/>
+        </svg>
+        <span class="gift-tag" aria-hidden="true">Veselé Vianoce</span>
+      </div>
       <div class="prose">
         <p class="eyebrow">Akcia</p>
         <h2>Ideálne ako vianočný darček</h2>
