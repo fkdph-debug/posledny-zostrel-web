@@ -35,6 +35,17 @@
   ],
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.poslednyzostrel.sk"
+        }
+      ],
+      "destination": "https://poslednyzostrel.sk/$1",
+      "permanent": true
+    },
+    {
       "source": "/matej-beznak.html",
       "destination": "/matej-beznak",
       "permanent": true
