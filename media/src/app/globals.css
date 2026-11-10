@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.5rem;
+  /* farby webu poslednyzostrel.sk */
+  --background: #F5F3EF;
+  --foreground: #242424;
+  --card: #FFFFFF;
+  --card-foreground: #242424;
+  --popover: #FFFFFF;
+  --popover-foreground: #242424;
+  --primary: #2A1D19;
+  --primary-foreground: #F5F3EF;
+  --secondary: #E8E4DB;
+  --secondary-foreground: #2A1D19;
+  --muted: #E8E4DB;
+  --muted-foreground: #6B625C;
+  --accent: #E8E4DB;
+  --accent-foreground: #2A1D19;
+  --destructive: #D7262E;
+  --border: #DEDAD2;
+  --input: #DEDAD2;
+  --ring: #BC975B;
+  --brand-green: #079E68;
+  --brand-green-dark: #057F53;
+  --brand-gold: #BC975B;
+  --brand-red: #D7262E;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Noto Serif", Georgia, serif;
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-dark: var(--brand-green-dark);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-red: var(--brand-red);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
