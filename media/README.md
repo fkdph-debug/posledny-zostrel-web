@@ -9,7 +9,7 @@ Zdroj pre všetky mediálne výstupy knihy *Posledný zostrel*. Správcovia FB s
 **Stack:** Next.js 15 · Tailwind 4 · Supabase (auth, Postgres, Storage) · Vercel. Štruktúra prevzatá z grafika.kolek.at.
 
 Aplikácia žije v priečinku `media/` repozitára `posledny-zostrel-web` a na Verceli je to **samostatný projekt** s *Root Directory* = `media`.
-Statický web v koreni repozitára ju ignoruje (`/.vercelignore`), media projekt sa prebuilduje len pri zmene v `media/` (`media/vercel.json`).
+Statický web v koreni repozitára presmeruje `/media/*` na subdoménu (`/vercel.json`), media projekt sa prebuilduje len pri zmene v `media/` (`media/vercel.json`).
 
 ## Nasadenie
 

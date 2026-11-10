@@ -35,6 +35,11 @@
   ],
   "redirects": [
     {
+      "source": "/media/:path*",
+      "destination": "https://media.poslednyzostrel.sk/",
+      "permanent": false
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
