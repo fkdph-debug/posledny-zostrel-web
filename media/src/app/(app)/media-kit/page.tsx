@@ -37,14 +37,6 @@ export default async function MediaKitPage() {
         </p>
       )}
 
-      <section id="texty" className="scroll-mt-44 space-y-3 md:scroll-mt-6">
-        <div>
-          <h2 className="font-serif text-xl font-semibold">Texty postov na FB</h2>
-          <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
-        </div>
-        <Snippets snippets={(snippets ?? []) as Snippet[]} />
-      </section>
-
       {KIT_CATEGORIES.map((c) => (
         <section key={c.slug} id={c.slug} className="scroll-mt-44 space-y-3 md:scroll-mt-6">
           <div>
@@ -59,6 +51,14 @@ export default async function MediaKitPage() {
           />
         </section>
       ))}
+
+      <section id="texty" className="scroll-mt-44 space-y-3 md:scroll-mt-6">
+        <div>
+          <h2 className="font-serif text-xl font-semibold">Texty postov na FB</h2>
+          <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
+        </div>
+        <Snippets snippets={(snippets ?? []) as Snippet[]} />
+      </section>
     </div>
   );
 }
