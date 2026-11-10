@@ -50,8 +50,8 @@ npm install
 npm run dev
 ```
 
-## OneDrive odkazy
-Pri každej udalosti aj kategórii media kitu sa dá namiesto súboru vložiť **zdieľací odkaz z OneDrive / SharePointu**
+## Odkazy (sekcia Videá)
+V sekcii **Videá** sa dajú ukladať odkazy (OneDrive, YouTube, Drive…) ako názov + odkaz – bez náhľadu, zobrazia sa ako zoznam a otvoria sa priamo u poskytovateľa. Vhodné pre originály videí nad 50 MB.
 (zdieľanie „Ktokoľvek s odkazom“). Appka si cez `/api/onedrive` načíta názov a náhľad, náhľad uloží do Storage
 a originál pri otvorení/stiahnutí načíta priamo z OneDrive – do Supabase sa nič veľké neukladá (vhodné aj pre videá nad 50 MB).
 Ak OneDrive odkaz neprezradí, appka ponúkne „Uložiť aj tak ako odkaz“ (dlaždica bez náhľadu, s odkazom).

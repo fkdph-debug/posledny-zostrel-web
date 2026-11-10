@@ -50,7 +50,7 @@ export default async function MediaKitPage() {
             </div>
             <ShareButton iconOnly path={`/media-kit#${c.slug}`} title={`Posledný zostrel – media kit: ${c.name}`} />
           </div>
-          <Uploader kitCategory={c.slug} label="Nahrať" />
+          <Uploader kitCategory={c.slug} label="Nahrať" links={c.slug === "videa"} />
           <Gallery
             assets={list.filter((a) => a.kit_category === c.slug)}
             zipName={`posledny-zostrel-${c.slug}`}

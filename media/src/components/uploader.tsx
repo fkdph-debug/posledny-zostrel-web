@@ -65,11 +65,14 @@ export function Uploader({
   eventId = null,
   kitCategory = null,
   label = "Nahrať fotky / videá",
+  links = false,
   className,
 }: {
   eventId?: string | null;
   kitCategory?: string | null;
   label?: string;
+  /** Umožniť ukladať odkazy (OneDrive, YouTube…) – bez náhľadu, len názov + odkaz. */
+  links?: boolean;
   className?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -138,55 +141,38 @@ export function Uploader({
   }
 
   const [link, setLink] = useState("");
+  const [linkName, setLinkName] = useState("");
   const [linkBusy, setLinkBusy] = useState(false);
   const [linkFail, setLinkFail] = useState<string | null>(null);
 
-  async function addLink(force = false) {
-    const url = link.trim();
+  async function addLink() {
+    let url = link.trim();
     if (!url) return;
-    setErrors([]);
+    if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+    try {
+      new URL(url);
+    } catch {
+      setLinkFail("Toto nevyzerá ako odkaz.");
+      return;
+    }
     setLinkFail(null);
     setLinkBusy(true);
     try {
-      const q = (mode: string) => `/api/onedrive?mode=${mode}&url=${encodeURIComponent(url)}`;
-      const metaRes = await fetch(q("meta"));
-      const meta = (await metaRes.json().catch(() => ({}))) as {
-        ok?: boolean; name?: string | null; size?: number | null; mime?: string | null; error?: string;
-      };
-      if (!metaRes.ok && !force) {
-        setLinkFail(meta.error ?? "Odkaz sa nepodarilo načítať.");
-        return;
-      }
-      // náhľad: z OneDrive -> canvas -> Storage
-      let thumbPath: string | null = null;
-      let dims: { width: number; height: number } | null = null;
-      const tRes = metaRes.ok ? await fetch(q("thumb")).catch(() => null) : null;
-      if (tRes?.ok) {
-        const blob = await tRes.blob();
-        const t = await imageThumb(new File([blob], "nahlad.jpg", { type: blob.type || "image/jpeg" }));
-        if (t) {
-          const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-          const path = `nahlady/${stamp}.jpg`;
-          const { error } = await createClient().storage.from("media").upload(path, t.blob, { contentType: "image/jpeg" });
-          if (!error) {
-            thumbPath = path;
-            if (!meta.mime?.startsWith("video/")) dims = { width: t.width, height: t.height };
-          }
-        }
-      }
+      const host = new URL(url).hostname.replace(/^www\./, "");
       await registerAsset({
         event_id: eventId,
         kit_category: eventId ? null : kitCategory,
-        name: meta.name || "OneDrive súbor",
+        name: linkName.trim() || `Odkaz – ${host}`,
         path: null,
         external_url: url,
-        thumb_path: thumbPath,
-        size: meta.size ?? 0,
-        mime: meta.mime ?? (thumbPath ? "image/jpeg" : null),
-        width: dims?.width ?? null,
-        height: dims?.height ?? null,
+        thumb_path: null,
+        size: 0,
+        mime: "text/uri-list",
+        width: null,
+        height: null,
       });
       setLink("");
+      setLinkName("");
     } catch (e) {
       setLinkFail((e as Error).message);
     } finally {
@@ -239,39 +225,41 @@ export function Uploader({
           )}
         </span>
       </div>
-      <form
-        className="mt-2 flex gap-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          addLink();
-        }}
-      >
-        <div className="relative min-w-0 flex-1">
-          <Link2 className="text-muted-foreground pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
+      {links && (
+        <form
+          className="mt-2 flex flex-col gap-2 sm:flex-row"
+          onSubmit={(e) => {
+            e.preventDefault();
+            addLink();
+          }}
+        >
           <Input
-            value={link}
-            onChange={(e) => {
-              setLink(e.target.value);
-              setLinkFail(null);
-            }}
-            inputMode="url"
-            placeholder="Vložiť odkaz z OneDrive…"
-            className="bg-card h-10 pl-8 sm:h-8"
-            aria-label="Odkaz z OneDrive"
+            value={linkName}
+            onChange={(e) => setLinkName(e.target.value)}
+            placeholder="Názov (napr. FB video 4:5 – originál)"
+            className="bg-card h-10 sm:h-8 sm:max-w-60"
+            aria-label="Názov odkazu"
           />
-        </div>
-        <Button type="submit" size="sm" className="h-10 sm:h-8" disabled={!link.trim() || linkBusy}>
-          {linkBusy ? <Loader2 className="animate-spin" /> : "Pridať"}
-        </Button>
-      </form>
-      {linkFail && (
-        <div className="text-destructive mt-1.5 flex flex-wrap items-center gap-x-2 text-xs">
-          <span>{linkFail}</span>
-          <button type="button" className="cursor-pointer underline" onClick={() => addLink(true)}>
-            Uložiť aj tak ako odkaz
-          </button>
-        </div>
+          <div className="relative min-w-0 flex-1">
+            <Link2 className="text-muted-foreground pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
+            <Input
+              value={link}
+              onChange={(e) => {
+                setLink(e.target.value);
+                setLinkFail(null);
+              }}
+              inputMode="url"
+              placeholder="Odkaz (OneDrive, YouTube, Drive…)"
+              className="bg-card h-10 pl-8 sm:h-8"
+              aria-label="Odkaz"
+            />
+          </div>
+          <Button type="submit" size="sm" className="h-10 sm:h-8" disabled={!link.trim() || linkBusy}>
+            {linkBusy ? <Loader2 className="animate-spin" /> : "Pridať odkaz"}
+          </Button>
+        </form>
       )}
+      {linkFail && <p className="text-destructive mt-1.5 text-xs">{linkFail}</p>}
       {errors.length > 0 && (
         <ul className="text-destructive mt-2 space-y-0.5 text-xs">
           {errors.map((e) => (

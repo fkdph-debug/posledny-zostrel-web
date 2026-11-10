@@ -14,6 +14,7 @@ import {
   Cloud,
   ChevronRight,
   Download,
+  ExternalLink,
   FileText,
   FolderDown,
   Loader2,
@@ -23,6 +24,76 @@ import {
 } from "lucide-react";
 
 const oneDriveView = (url: string) => `/api/onedrive?mode=view&url=${encodeURIComponent(url)}`;
+
+function LinkList({ links, me }: { links: AssetView[]; me?: string }) {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [, start] = useTransition();
+  return (
+    <ul className="divide-y rounded-lg border">
+      {links.map((a) => {
+        const host = (() => {
+          try {
+            return new URL(a.external_url!).hostname.replace(/^www\./, "");
+          } catch {
+            return "";
+          }
+        })();
+        return (
+          <li key={a.id} className="bg-card">
+            <div className="flex items-center gap-3 px-3 py-2.5">
+              <Cloud className="text-muted-foreground size-4 shrink-0" />
+              <a
+                href={a.external_url!}
+                target="_blank"
+                rel="noopener"
+                className="min-w-0 flex-1 hover:underline"
+                title={a.external_url!}
+              >
+                <span className="block truncate text-sm font-medium">{a.name}</span>
+                <span className="text-muted-foreground block truncate text-xs">
+                  {host} · {formatDate(a.created_at)}
+                  {a.uploaded_by ? ` · ${a.uploaded_by}` : ""}
+                </span>
+              </a>
+              <CopyButton text={a.external_url!} label="Kopírovať" size="icon-sm" variant="ghost" />
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                title="Komentáre"
+                className={cn(openId === a.id && "bg-accent")}
+                onClick={() => setOpenId(openId === a.id ? null : a.id)}
+              >
+                <MessageSquareText />
+              </Button>
+              <Button variant="ghost" size="icon-sm" title="Otvoriť" asChild>
+                <a href={a.external_url!} target="_blank" rel="noopener">
+                  <ExternalLink />
+                </a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                title="Zmazať odkaz"
+                className="hover:text-destructive"
+                onClick={() => {
+                  if (!confirm(`Zmazať odkaz „${a.name}“?`)) return;
+                  start(() => deleteAsset(a.id));
+                }}
+              >
+                <Trash2 />
+              </Button>
+            </div>
+            {openId === a.id && (
+              <div className="border-t px-3 py-3">
+                <Comments assetId={a.id} me={me} compact />
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 function Tile({ a, onOpen }: { a: AssetView; onOpen: () => void }) {
   return (
@@ -244,7 +315,7 @@ function Viewer({
 }
 
 export function Gallery({
-  assets,
+  assets: allAssets,
   zipName,
   empty = "Zatiaľ tu nič nie je.",
   me,
@@ -256,6 +327,8 @@ export function Gallery({
   me?: string;
   className?: string;
 }) {
+  // odkazy (bez súboru v Storage) sa zobrazujú ako zoznam, nie dlaždice
+  const assets = allAssets.filter((a) => a.path);
   const [open, setOpen] = useState<number | null>(null);
   const [zipping, setZipping] = useState<string | null>(null);
   const current = open !== null ? assets[open] : null;
@@ -306,18 +379,24 @@ export function Gallery({
     }
   }
 
-  if (!assets.length)
+  const links = allAssets.filter((a) => !a.path && a.external_url);
+
+  if (!assets.length && !links.length)
     return <p className={cn("text-muted-foreground py-4 text-sm", className)}>{empty}</p>;
 
   const total = assets.reduce((s, a) => s + (a.size || 0), 0);
 
   return (
     <div className={cn("space-y-3", className)}>
+      {links.length > 0 && <LinkList links={links} me={me} />}
+      {assets.length > 0 && (
       <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 sm:gap-2 lg:grid-cols-5">
         {assets.map((a, i) => (
           <Tile key={a.id} a={a} onOpen={() => setOpen(i)} />
         ))}
       </div>
+      )}
+      {assets.length > 0 && (
       <div className="flex items-center justify-between gap-2">
         <span className="text-muted-foreground text-xs">
           {assets.length} {assets.length === 1 ? "súbor" : assets.length < 5 ? "súbory" : "súborov"} · {formatBytes(total)}
@@ -326,6 +405,7 @@ export function Gallery({
           {zipping ? <Loader2 className="animate-spin" /> : <FolderDown />} {zipping ?? "Stiahnuť všetko (ZIP)"}
         </Button>
       </div>
+      )}
 
       <Dialog open={current !== null} onOpenChange={(o) => !o && setOpen(null)}>
         <DialogContent className="max-h-[100dvh] max-w-[calc(100%-0.5rem)] overflow-y-auto p-3 sm:max-h-[95dvh] sm:max-w-5xl sm:p-6">
