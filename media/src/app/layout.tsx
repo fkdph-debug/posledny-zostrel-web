@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@fontsource/noto-serif/latin-ext-400.css";
 import "@fontsource/noto-serif/latin-ext-600.css";
 import "@fontsource/noto-serif/latin-ext-700.css";
@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   title: "Media hub – Posledný zostrel",
   description: "Podklady pre web, médiá a správcov FB stránok",
   robots: { index: false, follow: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#F5F3EF",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

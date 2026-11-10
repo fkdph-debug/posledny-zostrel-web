@@ -49,7 +49,7 @@ export function EventFormDialog({ event }: { event?: EventRow }) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="max-h-[95dvh] overflow-y-auto sm:max-w-lg">
         <DialogTitle className="font-serif text-lg">{event ? "Upraviť udalosť" : "Nová udalosť"}</DialogTitle>
         <form action={submit} className="space-y-4">
           {event && <input type="hidden" name="id" value={event.id} />}
@@ -64,7 +64,7 @@ export function EventFormDialog({ event }: { event?: EventRow }) {
                 id="ev-kind"
                 name="kind"
                 defaultValue={event?.kind ?? "nazivo"}
-                className="border-input h-9 w-full rounded-md border bg-transparent px-2 text-sm"
+                className="border-input h-9 w-full rounded-md border bg-transparent px-2 text-base md:text-sm"
               >
                 {(Object.keys(KINDS) as EventKind[]).map((k) => (
                   <option key={k} value={k}>

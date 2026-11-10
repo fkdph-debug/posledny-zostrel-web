@@ -24,7 +24,8 @@ create table if not exists public.assets (
   event_id     uuid references public.events(id) on delete cascade,
   kit_category text,                      -- kniha | vizualy | videa | logo | autor | tlac (ak nie je pri udalosti)
   name         text not null,
-  path         text not null unique,      -- cesta v Storage buckete "media"
+  path         text unique,               -- cesta v Storage buckete "media" (null = len odkaz)
+  external_url text,                      -- odkaz na OneDrive (originál ostáva tam)
   thumb_path   text,                      -- náhľad (vytvára prehliadač pri nahrávaní)
   size         bigint not null default 0,
   mime         text,
@@ -33,7 +34,8 @@ create table if not exists public.assets (
   caption      text,                      -- popis fotky / videa
   uploaded_by  text,
   created_at   timestamptz not null default now(),
-  check (event_id is not null or kit_category is not null)
+  check (event_id is not null or kit_category is not null),
+  constraint assets_source_check check (path is not null or external_url is not null)
 );
 create index if not exists assets_event_idx on public.assets(event_id, created_at);
 create index if not exists assets_kit_idx   on public.assets(kit_category, created_at);

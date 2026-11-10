@@ -13,15 +13,15 @@ const ITEMS = [
 export function Nav() {
   const pathname = usePathname();
   return (
-    <nav className="flex flex-row gap-1 md:flex-col">
+    <nav className="bg-secondary grid grid-cols-2 gap-1 rounded-lg p-1 md:flex md:flex-col md:bg-transparent md:p-0">
       {ITEMS.map(({ href, label, icon: Icon, match }) => (
         <Link
           key={href}
           href={href}
           className={cn(
-            "flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors",
+            "flex h-9 items-center justify-center gap-2 rounded-md px-2.5 text-sm transition-colors md:h-auto md:justify-start md:py-1.5",
             match(pathname)
-              ? "bg-accent text-accent-foreground font-medium"
+              ? "bg-card text-foreground font-medium shadow-sm md:bg-accent md:shadow-none"
               : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
           )}
         >

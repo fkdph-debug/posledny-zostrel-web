@@ -81,7 +81,8 @@ export async function registerAsset(input: {
   event_id: string | null;
   kit_category: string | null;
   name: string;
-  path: string;
+  path: string | null;
+  external_url?: string | null;
   thumb_path: string | null;
   size: number;
   mime: string | null;
@@ -89,7 +90,10 @@ export async function registerAsset(input: {
   height: number | null;
 }) {
   const { supabase, who } = await requireUser();
-  const { error } = await supabase.from("assets").insert({ ...input, uploaded_by: who });
+  if (!input.path && !input.external_url) throw new Error("Chýba súbor alebo odkaz.");
+  const { error } = await supabase
+    .from("assets")
+    .insert({ ...input, external_url: input.external_url ?? null, uploaded_by: who });
   if (error) throw new Error(error.message);
   revalidateAll(input.event_id);
 }
@@ -116,7 +120,8 @@ export async function deleteAsset(id: string) {
   if (a) {
     await supabase.storage
       .from(BUCKET)
-      .remove([a.path, a.thumb_path].filter(Boolean) as string[]);
+      .remove([a.path, a.thumb_path].filter(Boolean) as string[])
+      .catch(() => {});
   }
   const { error } = await supabase.from("assets").delete().eq("id", id);
   if (error) throw new Error(error.message);

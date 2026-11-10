@@ -25,7 +25,8 @@ export type Asset = {
   event_id: string | null;
   kit_category: string | null;
   name: string;
-  path: string;
+  path: string | null;
+  external_url: string | null;
   thumb_path: string | null;
   size: number;
   mime: string | null;

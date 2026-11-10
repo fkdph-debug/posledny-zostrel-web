@@ -49,3 +49,10 @@ cp .env.example .env.local   # doplň hodnoty zo Supabase
 npm install
 npm run dev
 ```
+
+## OneDrive odkazy
+Pri každej udalosti aj kategórii media kitu sa dá namiesto súboru vložiť **zdieľací odkaz z OneDrive / SharePointu**
+(zdieľanie „Ktokoľvek s odkazom“). Appka si cez `/api/onedrive` načíta názov a náhľad, náhľad uloží do Storage
+a originál pri otvorení/stiahnutí načíta priamo z OneDrive – do Supabase sa nič veľké neukladá (vhodné aj pre videá nad 50 MB).
+Ak OneDrive odkaz neprezradí, appka ponúkne „Uložiť aj tak ako odkaz“ (dlaždica bez náhľadu, s odkazom).
+Migrácia DB: `supabase/2026-11-10_odkazy.sql` (spustená 10. 11. 2026).

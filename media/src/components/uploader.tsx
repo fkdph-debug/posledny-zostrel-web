@@ -5,7 +5,8 @@ import { createClient } from "@/lib/supabase/client";
 import { registerAsset } from "@/app/(app)/actions";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes, safeName } from "@/lib/utils";
-import { Upload } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Link2, Loader2, Upload } from "lucide-react";
 
 const MAX_BYTES = 50 * 1024 * 1024; // limit Supabase Free plánu na jeden súbor
 
@@ -136,6 +137,63 @@ export function Uploader({
     if (inputRef.current) inputRef.current.value = "";
   }
 
+  const [link, setLink] = useState("");
+  const [linkBusy, setLinkBusy] = useState(false);
+  const [linkFail, setLinkFail] = useState<string | null>(null);
+
+  async function addLink(force = false) {
+    const url = link.trim();
+    if (!url) return;
+    setErrors([]);
+    setLinkFail(null);
+    setLinkBusy(true);
+    try {
+      const q = (mode: string) => `/api/onedrive?mode=${mode}&url=${encodeURIComponent(url)}`;
+      const metaRes = await fetch(q("meta"));
+      const meta = (await metaRes.json().catch(() => ({}))) as {
+        ok?: boolean; name?: string | null; size?: number | null; mime?: string | null; error?: string;
+      };
+      if (!metaRes.ok && !force) {
+        setLinkFail(meta.error ?? "Odkaz sa nepodarilo načítať.");
+        return;
+      }
+      // náhľad: z OneDrive -> canvas -> Storage
+      let thumbPath: string | null = null;
+      let dims: { width: number; height: number } | null = null;
+      const tRes = metaRes.ok ? await fetch(q("thumb")).catch(() => null) : null;
+      if (tRes?.ok) {
+        const blob = await tRes.blob();
+        const t = await imageThumb(new File([blob], "nahlad.jpg", { type: blob.type || "image/jpeg" }));
+        if (t) {
+          const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+          const path = `nahlady/${stamp}.jpg`;
+          const { error } = await createClient().storage.from("media").upload(path, t.blob, { contentType: "image/jpeg" });
+          if (!error) {
+            thumbPath = path;
+            if (!meta.mime?.startsWith("video/")) dims = { width: t.width, height: t.height };
+          }
+        }
+      }
+      await registerAsset({
+        event_id: eventId,
+        kit_category: eventId ? null : kitCategory,
+        name: meta.name || "OneDrive súbor",
+        path: null,
+        external_url: url,
+        thumb_path: thumbPath,
+        size: meta.size ?? 0,
+        mime: meta.mime ?? (thumbPath ? "image/jpeg" : null),
+        width: dims?.width ?? null,
+        height: dims?.height ?? null,
+      });
+      setLink("");
+    } catch (e) {
+      setLinkFail((e as Error).message);
+    } finally {
+      setLinkBusy(false);
+    }
+  }
+
   return (
     <div
       className={cn(
@@ -158,24 +216,62 @@ export function Uploader({
         ref={inputRef}
         type="file"
         multiple
+        accept="image/*,video/*,application/pdf,.doc,.docx,.zip"
         className="hidden"
         onChange={(e) => upload(e.target.files)}
       />
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <Button
           type="button"
           size="sm"
           variant="outline"
-          className="bg-card"
+          className="bg-card h-10 sm:h-8"
           disabled={status !== null}
           onClick={() => inputRef.current?.click()}
         >
           <Upload /> {label}
         </Button>
         <span className="text-muted-foreground min-w-0 flex-1 truncate text-xs">
-          {status ?? "alebo sem súbory pretiahni myšou · max. 50 MB na súbor"}
+          {status ?? (
+            <>
+              <span className="hidden sm:inline">alebo sem súbory pretiahni myšou · </span>max. 50 MB na súbor
+            </>
+          )}
         </span>
       </div>
+      <form
+        className="mt-2 flex gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          addLink();
+        }}
+      >
+        <div className="relative min-w-0 flex-1">
+          <Link2 className="text-muted-foreground pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
+          <Input
+            value={link}
+            onChange={(e) => {
+              setLink(e.target.value);
+              setLinkFail(null);
+            }}
+            inputMode="url"
+            placeholder="Vložiť odkaz z OneDrive…"
+            className="bg-card h-10 pl-8 sm:h-8"
+            aria-label="Odkaz z OneDrive"
+          />
+        </div>
+        <Button type="submit" size="sm" className="h-10 sm:h-8" disabled={!link.trim() || linkBusy}>
+          {linkBusy ? <Loader2 className="animate-spin" /> : "Pridať"}
+        </Button>
+      </form>
+      {linkFail && (
+        <div className="text-destructive mt-1.5 flex flex-wrap items-center gap-x-2 text-xs">
+          <span>{linkFail}</span>
+          <button type="button" className="cursor-pointer underline" onClick={() => addLink(true)}>
+            Uložiť aj tak ako odkaz
+          </button>
+        </div>
+      )}
       {errors.length > 0 && (
         <ul className="text-destructive mt-2 space-y-0.5 text-xs">
           {errors.map((e) => (

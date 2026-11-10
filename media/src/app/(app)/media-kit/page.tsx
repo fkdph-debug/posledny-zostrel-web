@@ -16,15 +16,15 @@ export default async function MediaKitPage() {
   const list = await withThumbs((assets ?? []) as Asset[]);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8 md:space-y-10">
       <header>
-        <h1 className="font-serif text-3xl font-bold">Media kit</h1>
+        <h1 className="font-serif text-2xl font-bold md:text-3xl">Media kit</h1>
         <p className="text-muted-foreground mt-1 text-sm">
           Oficiálne podklady ku knihe – fotky z knihy, obálka, videá, logá a hotové texty postov. Všetko na stiahnutie v plnej kvalite.
         </p>
-        <nav className="mt-4 flex flex-wrap gap-1.5">
+        <nav className="-mx-3 mt-4 flex gap-1.5 overflow-x-auto px-3 pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:px-0">
           {[...KIT_CATEGORIES.map((c) => ({ slug: c.slug, name: c.name })), { slug: "texty", name: "Texty postov" }].map((c) => (
-            <a key={c.slug} href={`#${c.slug}`} className="bg-card hover:bg-accent rounded-full border px-3 py-1 text-xs">
+            <a key={c.slug} href={`#${c.slug}`} className="bg-card hover:bg-accent shrink-0 rounded-full border px-3 py-1.5 text-xs">
               {c.name}
             </a>
           ))}
@@ -37,7 +37,7 @@ export default async function MediaKitPage() {
         </p>
       )}
 
-      <section id="texty" className="scroll-mt-6 space-y-3">
+      <section id="texty" className="scroll-mt-44 space-y-3 md:scroll-mt-6">
         <div>
           <h2 className="font-serif text-xl font-semibold">Texty postov</h2>
           <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
@@ -46,7 +46,7 @@ export default async function MediaKitPage() {
       </section>
 
       {KIT_CATEGORIES.map((c) => (
-        <section key={c.slug} id={c.slug} className="scroll-mt-6 space-y-3">
+        <section key={c.slug} id={c.slug} className="scroll-mt-44 space-y-3 md:scroll-mt-6">
           <div>
             <h2 className="font-serif text-xl font-semibold">{c.name}</h2>
             <p className="text-muted-foreground text-xs">{c.hint}</p>

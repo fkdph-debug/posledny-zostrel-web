@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import type { AssetView } from "@/lib/types";
 import { deleteAsset, getFileUrl, getFileUrls, updateCaption } from "@/app/(app)/actions";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { CopyButton } from "@/components/copy-button";
 import { cn, formatBytes, formatDate, isImage, isVideo } from "@/lib/utils";
 import {
   ChevronLeft,
+  Cloud,
   ChevronRight,
   Download,
   FileText,
@@ -19,6 +20,8 @@ import {
   Play,
   Trash2,
 } from "lucide-react";
+
+const oneDriveView = (url: string) => `/api/onedrive?mode=view&url=${encodeURIComponent(url)}`;
 
 function Tile({ a, onOpen }: { a: AssetView; onOpen: () => void }) {
   return (
@@ -47,6 +50,11 @@ function Tile({ a, onOpen }: { a: AssetView; onOpen: () => void }) {
           <span className="flex size-10 items-center justify-center rounded-full bg-black/55 text-white">
             <Play className="size-5 fill-current" />
           </span>
+        </span>
+      )}
+      {a.external_url && (
+        <span className="absolute top-1.5 left-1.5 rounded bg-black/55 p-1 text-white" title="Z OneDrive">
+          <Cloud className="size-3" />
         </span>
       )}
       {a.caption && (
@@ -79,12 +87,13 @@ function Viewer({
     setUrl(null);
     setCaption(a.caption ?? "");
     setSaved(true);
-    if (isImage(a.mime) || isVideo(a.mime))
+    if (a.external_url) setUrl(oneDriveView(a.external_url));
+    else if (a.path && (isImage(a.mime) || isVideo(a.mime)))
       getFileUrl(a.path).then((u) => alive && setUrl(u)).catch(() => {});
     return () => {
       alive = false;
     };
-  }, [a.id, a.path, a.mime, a.caption]);
+  }, [a.id, a.path, a.external_url, a.mime, a.caption]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -97,16 +106,35 @@ function Viewer({
   }, [onPrev, onNext]);
 
   async function download() {
+    if (a.external_url) {
+      window.open(oneDriveView(a.external_url), "_blank", "noopener");
+      return;
+    }
+    if (!a.path) return;
     const u = await getFileUrl(a.path, a.name);
     window.location.href = u;
   }
 
+  // swipe na mobile
+  const touch = useRef<{ x: number; y: number } | null>(null);
+
   return (
     <div className="grid gap-4 md:grid-cols-[1fr_280px]">
-      <div className="relative flex min-h-56 items-center justify-center overflow-hidden rounded-md bg-neutral-900">
+      <div
+        className="relative -mx-3 -mt-3 flex min-h-56 items-center justify-center overflow-hidden bg-neutral-900 sm:mx-0 sm:mt-0 sm:rounded-md"
+        onTouchStart={(e) => (touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
+        onTouchEnd={(e) => {
+          const t = touch.current;
+          touch.current = null;
+          if (!t) return;
+          const dx = e.changedTouches[0].clientX - t.x;
+          const dy = e.changedTouches[0].clientY - t.y;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) (dx < 0 ? onNext : onPrev)?.();
+        }}
+      >
         {isVideo(a.mime) ? (
           url ? (
-            <video src={url} controls playsInline poster={a.thumbUrl ?? undefined} className="max-h-[70dvh] w-full" />
+            <video src={url} controls playsInline poster={a.thumbUrl ?? undefined} className="max-h-[60dvh] w-full sm:max-h-[70dvh]" />
           ) : (
             <Loader2 className="size-6 animate-spin text-white/60" />
           )
@@ -115,7 +143,7 @@ function Viewer({
           <img
             src={url ?? a.thumbUrl ?? ""}
             alt={a.caption ?? a.name}
-            className="max-h-[70dvh] w-auto object-contain"
+            className="max-h-[60dvh] w-auto object-contain sm:max-h-[70dvh]"
           />
         ) : (
           <div className="flex flex-col items-center gap-2 p-8 text-white/80">
@@ -124,12 +152,12 @@ function Viewer({
           </div>
         )}
         {onPrev && (
-          <button type="button" onClick={onPrev} className="absolute top-1/2 left-2 -translate-y-1/2 cursor-pointer rounded-full bg-black/50 p-2 text-white hover:bg-black/70" title="Predchádzajúci (←)">
+          <button type="button" onClick={onPrev} className="absolute top-1/2 left-2 hidden -translate-y-1/2 cursor-pointer sm:block rounded-full bg-black/50 p-2 text-white hover:bg-black/70" title="Predchádzajúci (←)">
             <ChevronLeft className="size-5" />
           </button>
         )}
         {onNext && (
-          <button type="button" onClick={onNext} className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full bg-black/50 p-2 text-white hover:bg-black/70" title="Ďalší (→)">
+          <button type="button" onClick={onNext} className="absolute top-1/2 right-2 hidden -translate-y-1/2 cursor-pointer sm:block rounded-full bg-black/50 p-2 text-white hover:bg-black/70" title="Ďalší (→)">
             <ChevronRight className="size-5" />
           </button>
         )}
@@ -139,15 +167,25 @@ function Viewer({
         <div>
           <DialogTitle className="text-sm font-medium break-all">{a.name}</DialogTitle>
           <p className="text-muted-foreground mt-0.5 text-xs">
-            {formatBytes(a.size)}
+            {a.external_url ? "OneDrive" : formatBytes(a.size)}
             {a.width && a.height ? ` · ${a.width} × ${a.height} px` : ""} · {formatDate(a.created_at)}
             {a.uploaded_by ? ` · ${a.uploaded_by}` : ""}
           </p>
         </div>
 
         <Button onClick={download} className="bg-brand-green hover:bg-brand-green-dark text-white">
-          <Download /> Stiahnuť originál
+          <Download /> {a.external_url ? "Otvoriť / stiahnuť z OneDrive" : "Stiahnuť originál"}
         </Button>
+        {a.external_url && (
+          <a
+            href={a.external_url}
+            target="_blank"
+            rel="noopener"
+            className="text-muted-foreground -mt-1 flex items-center gap-1 text-xs underline-offset-4 hover:underline"
+          >
+            <Cloud className="size-3.5" /> Zdieľací odkaz OneDrive
+          </a>
+        )}
 
         <div className="space-y-1.5">
           <label className="text-muted-foreground text-xs font-medium tracking-wide uppercase" htmlFor={`cap-${a.id}`}>
@@ -219,7 +257,9 @@ export function Gallery({
     setZipping("Pripravujem…");
     try {
       const { downloadZip } = await import("client-zip");
-      const urls = await getFileUrls(assets.map((a) => a.path));
+      const stored = assets.filter((a) => a.path);
+      const links = assets.filter((a) => !a.path && a.external_url);
+      const urls = stored.length ? await getFileUrls(stored.map((a) => a.path!)) : [];
       const used = new Set<string>();
       const uniq = (n: string) => {
         let name = n;
@@ -229,9 +269,9 @@ export function Gallery({
       };
       let i = 0;
       async function* files() {
-        for (const [k, a] of assets.entries()) {
+        for (const [k, a] of stored.entries()) {
           i = k + 1;
-          setZipping(`Sťahujem ${i}/${assets.length}…`);
+          setZipping(`Sťahujem ${i}/${stored.length}…`);
           const res = await fetch(urls[k] ?? "");
           yield { name: uniq(a.name), lastModified: new Date(a.created_at), input: res };
         }
@@ -240,6 +280,11 @@ export function Gallery({
           .map((a) => `${a.name}\n${a.caption}\n`)
           .join("\n");
         if (captions) yield { name: "popisy.txt", input: captions };
+        if (links.length)
+          yield {
+            name: "onedrive-odkazy.txt",
+            input: links.map((a) => `${a.name}\n${a.external_url}\n${a.caption ?? ""}\n`).join("\n"),
+          };
       }
       const blob = await downloadZip(files()).blob();
       const link = document.createElement("a");
@@ -261,7 +306,7 @@ export function Gallery({
 
   return (
     <div className={cn("space-y-3", className)}>
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">
+      <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 sm:gap-2 lg:grid-cols-5">
         {assets.map((a, i) => (
           <Tile key={a.id} a={a} onOpen={() => setOpen(i)} />
         ))}
@@ -276,7 +321,7 @@ export function Gallery({
       </div>
 
       <Dialog open={current !== null} onOpenChange={(o) => !o && setOpen(null)}>
-        <DialogContent className="max-h-[95dvh] overflow-y-auto sm:max-w-5xl">
+        <DialogContent className="max-h-[100dvh] max-w-[calc(100%-0.5rem)] overflow-y-auto p-3 sm:max-h-[95dvh] sm:max-w-5xl sm:p-6">
           {current && (
             <Viewer
               key={current.id}

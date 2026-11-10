@@ -35,7 +35,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
     .join("\n\n");
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       <Link href="/" className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-sm">
         <ArrowLeft className="size-4" /> Udalosti
       </Link>
@@ -46,7 +46,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
           <span className="bg-secondary rounded px-1.5 py-0.5 text-xs font-medium">{KINDS[e.kind]}</span>
         </div>
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <h1 className="font-serif text-3xl leading-tight font-bold">{e.title}</h1>
+          <h1 className="font-serif text-2xl leading-tight font-bold md:text-3xl">{e.title}</h1>
           <EventFormDialog event={e} />
         </div>
         <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
@@ -56,7 +56,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
             </span>
           )}
           {e.url && (
-            <a href={e.url} target="_blank" rel="noopener" className="text-foreground flex items-center gap-1 underline-offset-4 hover:underline">
+            <a href={e.url} target="_blank" rel="noopener" className="text-foreground flex min-w-0 items-center gap-1 break-all underline-offset-4 hover:underline">
               <ExternalLink className="size-4" /> {e.url.replace(/^https?:\/\/(www\.)?/, "").slice(0, 60)}
             </a>
           )}
@@ -69,7 +69,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
           <CopyButton text={summary} label="Kopírovať popis" variant="ghost" />
         </div>
         {e.description ? (
-          <p className="bg-card rounded-lg border p-4 text-[15px] leading-relaxed whitespace-pre-line">{e.description}</p>
+          <p className="bg-card rounded-lg border p-3 text-[15px] leading-relaxed whitespace-pre-line md:p-4">{e.description}</p>
         ) : (
           <p className="text-muted-foreground text-sm">Bez popisu – doplň cez „Upraviť“.</p>
         )}

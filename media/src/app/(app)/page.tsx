@@ -71,7 +71,7 @@ export default async function EventsPage({
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-serif text-3xl font-bold">Udalosti</h1>
+          <h1 className="font-serif text-2xl font-bold md:text-3xl">Udalosti</h1>
           <p className="text-muted-foreground mt-1 text-sm">
             Akcie naživo aj výstupy v médiách – fotky, videá a popisy na stiahnutie.
           </p>
@@ -79,13 +79,13 @@ export default async function EventsPage({
         <EventFormDialog />
       </header>
 
-      <div className="flex flex-wrap items-center gap-1.5">
+      <div className="-mx-3 flex items-center gap-1.5 overflow-x-auto px-3 pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:px-0">
         {[undefined, ...Object.keys(KINDS)].map((k) => (
           <Link
             key={k ?? "all"}
             href={filterLink(k)}
             className={cn(
-              "rounded-full border px-3 py-1 text-xs transition-colors",
+              "shrink-0 rounded-full border px-3 py-1.5 text-xs transition-colors",
               (typ ?? undefined) === k ? "bg-primary text-primary-foreground border-primary" : "bg-card hover:bg-accent"
             )}
           >
@@ -94,7 +94,7 @@ export default async function EventsPage({
         ))}
         <Link
           href={orderLink}
-          className="text-muted-foreground hover:text-foreground ml-auto flex items-center gap-1 text-xs"
+          className="text-muted-foreground hover:text-foreground ml-auto flex shrink-0 items-center gap-1 py-1.5 pl-2 text-xs"
         >
           <ArrowDownUp className="size-3.5" /> {oldestFirst ? "Od najstarších" : "Od najnovších"}
         </Link>
@@ -128,14 +128,14 @@ export default async function EventsPage({
                 )}
                 <Link
                   href={`/udalosti/${e.id}`}
-                  className={cn("bg-card hover:border-brand-gold/60 block rounded-lg border border-l-4 p-4 transition-colors", upcoming ? "border-l-brand-gold" : "border-l-primary/70")}
+                  className={cn("bg-card hover:border-brand-gold/60 block rounded-lg border border-l-4 p-3 transition-colors active:bg-accent/40 md:p-4", upcoming ? "border-l-brand-gold" : "border-l-primary/70")}
                 >
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
                     <span className="font-medium">{formatDay(e.date)}</span>
                     <span className={cn("rounded px-1.5 py-0.5 font-medium", KIND_STYLE[e.kind])}>{KINDS[e.kind]}</span>
                     {upcoming && <span className="text-brand-gold font-semibold">pripravuje sa</span>}
                   </div>
-                  <h2 className="mt-1.5 font-serif text-lg leading-snug font-semibold">{e.title}</h2>
+                  <h2 className="mt-1.5 font-serif text-base leading-snug font-semibold md:text-lg">{e.title}</h2>
                   <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                     {e.place && (
                       <span className="flex items-center gap-1">
@@ -165,10 +165,10 @@ export default async function EventsPage({
                     <div className="mt-3 flex gap-1.5 overflow-hidden">
                       {previewBy.get(e.id)!.map((a) => (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img key={a.id} src={a.thumbUrl ?? ""} alt="" loading="lazy" className="size-16 shrink-0 rounded object-cover" />
+                        <img key={a.id} src={a.thumbUrl ?? ""} alt="" loading="lazy" className="size-14 shrink-0 rounded object-cover md:size-16" />
                       ))}
                       {list.length > 5 && (
-                        <span className="bg-secondary text-muted-foreground flex size-16 shrink-0 items-center justify-center rounded text-xs">
+                        <span className="bg-secondary text-muted-foreground flex size-14 shrink-0 items-center justify-center rounded text-xs md:size-16">
                           +{list.length - 5}
                         </span>
                       )}

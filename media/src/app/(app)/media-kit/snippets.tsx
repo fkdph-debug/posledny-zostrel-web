@@ -24,7 +24,7 @@ function Editor({ s, onDone }: { s?: Snippet; onDone: () => void }) {
       {s && <input type="hidden" name="id" value={s.id} />}
       <div className="flex gap-2">
         <Input name="title" defaultValue={s?.title} placeholder="Názov, napr. Post k besede (SK)" required />
-        <select name="lang" defaultValue={s?.lang ?? "sk"} className="border-input h-9 rounded-md border bg-transparent px-2 text-sm">
+        <select name="lang" defaultValue={s?.lang ?? "sk"} className="border-input h-9 rounded-md border bg-transparent px-2 text-base md:text-sm">
           <option value="sk">SK</option>
           <option value="cz">CZ</option>
           <option value="en">EN</option>
@@ -53,8 +53,8 @@ export function Snippets({ snippets }: { snippets: Snippet[] }) {
         editing === s.id ? (
           <Editor key={s.id} s={s} onDone={() => setEditing(null)} />
         ) : (
-          <article key={s.id} className="bg-card group rounded-lg border p-4">
-            <div className="mb-2 flex items-center justify-between gap-2">
+          <article key={s.id} className="bg-card group rounded-lg border p-3 md:p-4">
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <h3 className="flex items-center gap-2 text-sm font-medium">
                 {s.title}
                 <span className="bg-secondary rounded px-1.5 py-0.5 text-[10px] uppercase">{s.lang}</span>
