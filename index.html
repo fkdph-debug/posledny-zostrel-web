@@ -354,14 +354,15 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .press-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
 .press-list li { border-top: 1px solid var(--line); }
 .press-list li:first-child { border-top: 0; }
-.press-list a { display: grid; grid-template-columns: 11rem minmax(0, 1fr) auto; gap: 6px 20px; align-items: baseline; padding: 18px 22px; text-decoration: none; color: inherit; }
+.press-list a, .press-list .noitem { display: grid; grid-template-columns: 11rem minmax(0, 1fr) auto; gap: 6px 20px; align-items: baseline; padding: 18px 22px; text-decoration: none; color: inherit; }
 .press-list a:hover { background: #FBFAF7; }
+.press-list .arrow.is-print { color: var(--muted); font-weight: 400; }
 .press-list .src { font-weight: 700; color: var(--ink-brown); }
 .press-list .src small { display: block; font-weight: 400; color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
 .press-list .ttl { font-family: var(--font-display); font-size: 1.05rem; color: #000; }
 .press-list .arrow { color: var(--green); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
 .press-list li.is-top a { background: #FBF7EF; }
-@media (max-width: 720px) { .press-list a { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .press-list a, .press-list .noitem { grid-template-columns: 1fr; } }
 
 /* Buy band */
 .buy { background: var(--sand); }
@@ -698,14 +699,22 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
         <h2>Napísali o Matejovi Beznákovi</h2>
       </div>
       <ul class="press-list">
-        <li class="is-top"><a href="https://www.sme.sk/historicka-revue/c/unikatny-hrdina-snp-matej-beznak-zostrelil-nemecke-lietadlo-z-platenneho-dvojplosnika" target="_blank" rel="noopener">
-          <span class="src"><img src="assets/img/logo-historicka-revue.png" alt="Historická revue"><small>SME · 10. 9. 2026 · Tomáš Mrva</small></span>
-          <span class="ttl">Unikátny hrdina SNP Matej Beznák: Zostrelil nemecké lietadlo z plátenného dvojplošníka</span>
-          <span class="arrow">Čítať ↗</span></a></li>
+        <li><div class="noitem">
+          <span class="src">Pravda – príloha Víkend<small>6. 11. 2026 · Jakub Prokeš</small></span>
+          <span class="ttl">Obálka prílohy a trojstranové interview</span>
+          <span class="arrow is-print">Tlačené vydanie</span></div></li>
         <li><a href="https://www.youtube.com/watch?v=fd_BDC10NKk" target="_blank" rel="noopener">
           <span class="src"><img class="is-rtvs" src="assets/img/logo-rtvs.svg" alt="RTVS"><small>21. 9. 2026 · reportáž z krstu</small></span>
           <span class="ttl">Výnimočný príbeh slovenského letca Mateja Beznáka</span>
           <span class="arrow">Pozrieť ↗</span></a></li>
+        <li class="is-top"><a href="https://www.sme.sk/historicka-revue/c/unikatny-hrdina-snp-matej-beznak-zostrelil-nemecke-lietadlo-z-platenneho-dvojplosnika" target="_blank" rel="noopener">
+          <span class="src"><img src="assets/img/logo-historicka-revue.png" alt="Historická revue"><small>SME · 10. 9. 2026 · Tomáš Mrva</small></span>
+          <span class="ttl">Unikátny hrdina SNP Matej Beznák: Zostrelil nemecké lietadlo z plátenného dvojplošníka</span>
+          <span class="arrow">Čítať ↗</span></a></li>
+        <li><div class="noitem">
+          <span class="src">Devex<small>jún 2026 · Juraj Vedej</small></span>
+          <span class="ttl">Chorvátom rád rozprávam, odkiaľ som</span>
+          <span class="arrow is-print">Tlačené vydanie</span></div></li>
         <li><a href="https://www.teraz.sk/slovensko/p-sumichrast-povstalecki-letci-boli/413355-clanok.html" target="_blank" rel="noopener">
           <span class="src">TASR / teraz.sk<small>18. 8. 2019</small></span>
           <span class="ttl">Vojenský historik: Povstaleckí letci boli skutoční hrdinovia</span>
