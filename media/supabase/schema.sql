@@ -101,9 +101,9 @@ select * from (values
   ('2026-09-21'::date, 'RTVS: reportáž z krstu knihy', 'media', 'RTVS',
    'https://www.youtube.com/watch?v=fd_BDC10NKk',
    'Výnimočný príbeh slovenského letca Mateja Beznáka – reportáž z krstu na IMAD Piešťany 2026.', 'FRK'),
-  ('2026-09-20'::date, 'Krst knihy na IMAD Piešťany 2026', 'nazivo', 'Letisko Piešťany – Medzinárodné letecké dni',
+  ('2026-09-05'::date, 'Krst knihy na IMAD Piešťany 2026', 'nazivo', 'Piešťany – Medzinárodné letecké dni IMAD 2026',
    null,
-   'Slávnostný krst knihy za účasti náčelníka Generálneho štábu OS SR gen. Miroslava Lorinca. POZOR: dátum treba overiť a opraviť.', 'FRK')
+   'Slávnostný krst knihy na Medzinárodných leteckých dňoch IMAD 2026 v Piešťanoch za účasti náčelníka Generálneho štábu OS SR gen. Miroslava Lorinca.', 'FRK')
 ) as v(date, title, kind, place, url, description, created_by)
 where not exists (select 1 from public.events);
 
