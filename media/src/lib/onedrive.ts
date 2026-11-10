@@ -51,10 +51,11 @@ export type DriveMeta = { name: string | null; size: number | null; mime: string
 /** Metadáta súboru (názov, veľkosť, typ), ak ich OneDrive vydá anonymne. */
 export async function getMeta(url: string): Promise<DriveMeta | null> {
   const token = shareToken(url);
-  for (const api of [
-    `https://api.onedrive.com/v1.0/shares/${token}/driveItem`,
-    `https://api.onedrive.com/v1.0/shares/${token}/root`,
-  ]) {
+  const host = new URL(url.trim()).hostname;
+  const apis = /sharepoint\.com$/i.test(host)
+    ? [`https://${host}/_api/v2.0/shares/${token}/driveItem`, `https://${host}/_api/v2.0/shares/${token}/root`]
+    : [`https://api.onedrive.com/v1.0/shares/${token}/driveItem`, `https://api.onedrive.com/v1.0/shares/${token}/root`];
+  for (const api of apis) {
     const res = await tryFetch(api, { headers: { Accept: "application/json", "User-Agent": UA } });
     if (!res) continue;
     try {
@@ -68,7 +69,7 @@ export async function getMeta(url: string): Promise<DriveMeta | null> {
 }
 
 /** Kandidáti na priamu adresu obsahu – skúšajú sa postupne. */
-function contentCandidates(url: string) {
+export function contentCandidates(url: string) {
   const u = new URL(url.trim());
   const token = shareToken(url);
   const out: string[] = [];
@@ -76,6 +77,9 @@ function contentCandidates(url: string) {
     const d = new URL(u);
     d.searchParams.set("download", "1");
     out.push(d.toString());
+    // SharePoint „shares“ API (OneDrive for Business) – rovnaký token, iný host
+    out.push(`https://${u.hostname}/_api/v2.0/shares/${token}/driveItem/content`);
+    out.push(`https://${u.hostname}/_api/v2.0/shares/${token}/root/content`);
   }
   out.push(`https://api.onedrive.com/v1.0/shares/${token}/root/content`);
   out.push(`https://api.onedrive.com/v1.0/shares/${token}/driveItem/content`);
@@ -106,9 +110,30 @@ export async function fetchContent(url: string): Promise<Response | null> {
 /** Malý náhľad (OneDrive thumbnails API), keď je k dispozícii. */
 export async function fetchThumb(url: string): Promise<Response | null> {
   const token = shareToken(url);
+  const host = new URL(url.trim()).hostname;
+  const base = /sharepoint\.com$/i.test(host)
+    ? `https://${host}/_api/v2.0/shares/${token}`
+    : `https://api.onedrive.com/v1.0/shares/${token}`;
   for (const size of ["large", "medium"]) {
-    const res = await tryFetch(`https://api.onedrive.com/v1.0/shares/${token}/root/thumbnails/0/${size}/content`);
-    if (isMedia(res)) return res;
+    for (const item of ["driveItem", "root"]) {
+      const res = await tryFetch(`${base}/${item}/thumbnails/0/${size}/content`);
+      if (isMedia(res)) return res;
+    }
   }
   return null;
+}
+
+/** Diagnostika: čo vráti každý kandidát (bez tela odpovede). */
+export async function probe(url: string) {
+  const out: Record<string, unknown>[] = [];
+  for (const c of contentCandidates(url)) {
+    try {
+      const res = await fetch(c, { redirect: "follow", headers: { "User-Agent": UA }, cache: "no-store" });
+      out.push({ url: c, status: res.status, type: res.headers.get("content-type"), final: res.url, len: res.headers.get("content-length") });
+      res.body?.cancel().catch(() => {});
+    } catch (e) {
+      out.push({ url: c, error: String(e) });
+    }
+  }
+  return out;
 }

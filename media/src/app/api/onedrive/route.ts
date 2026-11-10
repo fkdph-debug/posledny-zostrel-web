@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { fetchContent, fetchThumb, getMeta, isOneDriveUrl } from "@/lib/onedrive";
+import { fetchContent, fetchThumb, getMeta, isOneDriveUrl, probe } from "@/lib/onedrive";
 
 // /api/onedrive?url=<zdieľací odkaz>&mode=meta|thumb|view
 //  meta  – JSON {ok, name, size, mime}
@@ -30,6 +30,8 @@ export async function GET(req: NextRequest) {
   const mode = req.nextUrl.searchParams.get("mode") ?? "view";
   if (!isOneDriveUrl(url))
     return NextResponse.json({ ok: false, error: "Toto nie je odkaz na OneDrive / SharePoint." }, { status: 400 });
+
+  if (mode === "debug") return NextResponse.json({ meta: await getMeta(url), probe: await probe(url) });
 
   if (mode === "meta") {
     const meta = await getMeta(url);
