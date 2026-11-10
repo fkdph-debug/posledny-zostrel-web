@@ -1,0 +1,64 @@
+import { createClient } from "@/lib/supabase/server";
+import { withThumbs } from "@/lib/data";
+import { KIT_CATEGORIES, type Asset, type Snippet } from "@/lib/types";
+import { Uploader } from "@/components/uploader";
+import { Gallery } from "@/components/gallery";
+import { Snippets } from "./snippets";
+
+export const dynamic = "force-dynamic";
+
+export default async function MediaKitPage() {
+  const supabase = await createClient();
+  const [{ data: assets, error }, { data: snippets }] = await Promise.all([
+    supabase.from("assets").select("*").is("event_id", null).order("created_at"),
+    supabase.from("snippets").select("*").order("position"),
+  ]);
+  const list = await withThumbs((assets ?? []) as Asset[]);
+
+  return (
+    <div className="space-y-10">
+      <header>
+        <h1 className="font-serif text-3xl font-bold">Media kit</h1>
+        <p className="text-muted-foreground mt-1 text-sm">
+          Oficiálne podklady ku knihe – fotky z knihy, obálka, videá, logá a hotové texty postov. Všetko na stiahnutie v plnej kvalite.
+        </p>
+        <nav className="mt-4 flex flex-wrap gap-1.5">
+          {[...KIT_CATEGORIES.map((c) => ({ slug: c.slug, name: c.name })), { slug: "texty", name: "Texty postov" }].map((c) => (
+            <a key={c.slug} href={`#${c.slug}`} className="bg-card hover:bg-accent rounded-full border px-3 py-1 text-xs">
+              {c.name}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      {error && (
+        <p className="text-destructive rounded-md border border-current/30 p-3 text-sm">
+          Databáza nie je pripravená: {error.message}
+        </p>
+      )}
+
+      <section id="texty" className="scroll-mt-6 space-y-3">
+        <div>
+          <h2 className="font-serif text-xl font-semibold">Texty postov</h2>
+          <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
+        </div>
+        <Snippets snippets={(snippets ?? []) as Snippet[]} />
+      </section>
+
+      {KIT_CATEGORIES.map((c) => (
+        <section key={c.slug} id={c.slug} className="scroll-mt-6 space-y-3">
+          <div>
+            <h2 className="font-serif text-xl font-semibold">{c.name}</h2>
+            <p className="text-muted-foreground text-xs">{c.hint}</p>
+          </div>
+          <Uploader kitCategory={c.slug} label="Nahrať" />
+          <Gallery
+            assets={list.filter((a) => a.kit_category === c.slug)}
+            zipName={`posledny-zostrel-${c.slug}`}
+            empty="Zatiaľ prázdne."
+          />
+        </section>
+      ))}
+    </div>
+  );
+}
