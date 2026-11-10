@@ -54,7 +54,6 @@ export const KIT_CATEGORIES = [
   { slug: "kniha", name: "Fotky z knihy", hint: "Dvojstrany, ukážky strán, dobové fotografie z knihy" },
   { slug: "vizualy", name: "Obálka a vizuály", hint: "Obálka, mockupy, maľba súboja, bannery, thumbnaily" },
   { slug: "videa", name: "Videá", hint: "FB video 4:5, short / reel 9:16, reportáže" },
-  { slug: "autor", name: "Matej Beznák a autor", hint: "Portréty, fotky autora Jakuba Prokeša" },
   { slug: "logo", name: "Logá", hint: "Znak letky, logá partnerov" },
   { slug: "tlac", name: "Tlačové správy a dokumenty", hint: "PDF, DOCX – tlačové správy, ukážky textu" },
 ] as const;

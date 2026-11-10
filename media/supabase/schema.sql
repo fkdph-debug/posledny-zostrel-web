@@ -22,7 +22,7 @@ create index if not exists events_date_idx on public.events(date desc);
 create table if not exists public.assets (
   id           uuid primary key default gen_random_uuid(),
   event_id     uuid references public.events(id) on delete cascade,
-  kit_category text,                      -- kniha | vizualy | videa | logo | autor | tlac (ak nie je pri udalosti)
+  kit_category text,                      -- kniha | vizualy | videa | logo | tlac (ak nie je pri udalosti)
   name         text not null,
   path         text unique,               -- cesta v Storage buckete "media" (null = len odkaz)
   external_url text,                      -- odkaz na OneDrive (originál ostáva tam)

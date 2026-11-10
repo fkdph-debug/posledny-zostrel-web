@@ -3,7 +3,7 @@
 Zdroj pre všetky mediálne výstupy knihy *Posledný zostrel*. Správcovia FB stránok a ľudia z marketingu si odtiaľto sťahujú podklady.
 
 - **Udalosti** – chronologicky zoradené akcie naživo aj mediálne výstupy; ku každej dátum, typ, miesto, odkaz, popis, fotky a videá (stiahnutie po jednom aj ako ZIP s popismi).
-- **Media kit** – fotky z knihy, obálka a vizuály, videá, logá, autor, tlačové správy + hotové texty postov (SK/CZ) na skopírovanie.
+- **Media kit** – fotky z knihy, obálka a vizuály, videá, logá, tlačové správy + hotové texty postov (SK/CZ) na skopírovanie.
 - Odkaz na predaj **www.luc.sk/poslednyzostrel** (presmerovaný s UTM na Shoptet) je v bočnom paneli s tlačidlom na skopírovanie.
 
 **Stack:** Next.js 15 · Tailwind 4 · Supabase (auth, Postgres, Storage) · Vercel. Štruktúra prevzatá z grafika.kolek.at.
