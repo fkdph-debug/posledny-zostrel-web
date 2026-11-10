@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { fetchContent, fetchThumb, getMeta, isOneDriveUrl, probe } from "@/lib/onedrive";
+import { fetchContent, fetchThumb, getMeta, isOneDriveUrl, probe, requiresLogin } from "@/lib/onedrive";
 
 // /api/onedrive?url=<zdieľací odkaz>&mode=meta|thumb|view
 //  meta  – JSON {ok, name, size, mime}
@@ -42,11 +42,18 @@ export async function GET(req: NextRequest) {
   if (mode === "meta") {
     const meta = await getMeta(url);
     const res = await fetchContent(url);
-    if (!res && !meta)
+    if (!res && !meta) {
+      const login = await requiresLogin(url);
       return NextResponse.json(
-        { ok: false, error: "Odkaz sa nepodarilo načítať. Je súbor zdieľaný ako „Ktokoľvek s odkazom“?" },
+        {
+          ok: false,
+          error: login
+            ? "OneDrive pri tomto odkaze vyžaduje prihlásenie do Microsoft účtu – je zdieľaný len pre ľudí z organizácie alebo konkrétne osoby. V OneDrive klikni na Zdieľať → nastavenia odkazu → „Ktokoľvek s odkazom“ a vlož nový odkaz."
+            : "Odkaz sa nepodarilo načítať. Je súbor zdieľaný ako „Ktokoľvek s odkazom“?",
+        },
         { status: 404 }
       );
+    }
     const out = {
       ok: !!res,
       name: meta?.name ?? (res ? fileName(res) : null),

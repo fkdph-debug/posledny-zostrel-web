@@ -137,3 +137,14 @@ export async function probe(url: string) {
   }
   return out;
 }
+
+/** Pravda, ak zdieľací odkaz končí na prihlasovacej stránke Microsoftu (nie je „Ktokoľvek s odkazom“). */
+export async function requiresLogin(url: string) {
+  try {
+    const res = await fetch(url.trim(), { redirect: "follow", headers: { "User-Agent": UA }, cache: "no-store" });
+    res.body?.cancel().catch(() => {});
+    return /login\.microsoftonline\.com|login\.live\.com/i.test(res.url);
+  } catch {
+    return false;
+  }
+}
