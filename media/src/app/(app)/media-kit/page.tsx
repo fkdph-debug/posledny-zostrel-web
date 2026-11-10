@@ -23,7 +23,7 @@ export default async function MediaKitPage() {
           Oficiálne podklady ku knihe – fotky z knihy, obálka, videá, logá a hotové texty postov. Všetko na stiahnutie v plnej kvalite.
         </p>
         <nav className="-mx-3 mt-4 flex gap-1.5 overflow-x-auto px-3 pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:px-0">
-          {[...KIT_CATEGORIES.map((c) => ({ slug: c.slug, name: c.name })), { slug: "texty", name: "Texty postov" }].map((c) => (
+          {[...KIT_CATEGORIES.map((c) => ({ slug: c.slug, name: c.name })), { slug: "texty", name: "Texty postov na FB" }].map((c) => (
             <a key={c.slug} href={`#${c.slug}`} className="bg-card hover:bg-accent shrink-0 rounded-full border px-3 py-1.5 text-xs">
               {c.name}
             </a>
@@ -39,7 +39,7 @@ export default async function MediaKitPage() {
 
       <section id="texty" className="scroll-mt-44 space-y-3 md:scroll-mt-6">
         <div>
-          <h2 className="font-serif text-xl font-semibold">Texty postov</h2>
+          <h2 className="font-serif text-xl font-semibold">Texty postov na FB</h2>
           <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
         </div>
         <Snippets snippets={(snippets ?? []) as Snippet[]} />

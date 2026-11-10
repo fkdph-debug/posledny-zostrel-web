@@ -55,7 +55,7 @@ export const KIT_CATEGORIES = [
   { slug: "vizualy", name: "Obálka a vizuály", hint: "Obálka, mockupy, maľba súboja, bannery, thumbnaily" },
   { slug: "videa", name: "Videá", hint: "FB video 4:5, short / reel 9:16, reportáže" },
   { slug: "logo", name: "Logá", hint: "Znak letky, logá partnerov" },
-  { slug: "tlac", name: "Tlačové správy a dokumenty", hint: "PDF, DOCX – tlačové správy, ukážky textu" },
+  { slug: "tlac", name: "Texty", hint: "Tlačové správy, ukážky z knihy, anotácie – PDF, DOCX" },
 ] as const;
 
 export const SALE_URL = "https://www.luc.sk/poslednyzostrel";
