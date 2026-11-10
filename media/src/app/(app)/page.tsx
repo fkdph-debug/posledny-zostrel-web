@@ -4,6 +4,7 @@ import { withThumbs } from "@/lib/data";
 import { KINDS, type Asset, type EventRow } from "@/lib/types";
 import { cn, formatDay } from "@/lib/utils";
 import { EventFormDialog } from "@/components/event-form";
+import { ShareButton } from "@/components/share-button";
 import { ArrowDownUp, ExternalLink, ImageIcon, MapPin, Video } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -135,7 +136,10 @@ export default async function EventsPage({
                     <span className={cn("rounded px-1.5 py-0.5 font-medium", KIND_STYLE[e.kind])}>{KINDS[e.kind]}</span>
                     {upcoming && <span className="text-brand-gold font-semibold">pripravuje sa</span>}
                   </div>
-                  <h2 className="mt-1.5 font-serif text-base leading-snug font-semibold md:text-lg">{e.title}</h2>
+                  <div className="mt-1.5 flex items-start justify-between gap-2">
+                    <h2 className="font-serif text-base leading-snug font-semibold md:text-lg">{e.title}</h2>
+                    <ShareButton iconOnly path={`/udalosti/${e.id}`} title={e.title} text={e.description ?? undefined} className="-mt-1.5 -mr-1.5" />
+                  </div>
                   <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                     {e.place && (
                       <span className="flex items-center gap-1">

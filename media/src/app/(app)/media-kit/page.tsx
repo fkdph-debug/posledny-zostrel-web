@@ -4,6 +4,7 @@ import { KIT_CATEGORIES, type Asset, type Snippet } from "@/lib/types";
 import { Uploader } from "@/components/uploader";
 import { Gallery } from "@/components/gallery";
 import { Snippets } from "./snippets";
+import { ShareButton } from "@/components/share-button";
 
 export const dynamic = "force-dynamic";
 
@@ -39,9 +40,12 @@ export default async function MediaKitPage() {
 
       {KIT_CATEGORIES.map((c) => (
         <section key={c.slug} id={c.slug} className="scroll-mt-44 space-y-3 md:scroll-mt-6">
-          <div>
-            <h2 className="font-serif text-xl font-semibold">{c.name}</h2>
-            <p className="text-muted-foreground text-xs">{c.hint}</p>
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h2 className="font-serif text-xl font-semibold">{c.name}</h2>
+              <p className="text-muted-foreground text-xs">{c.hint}</p>
+            </div>
+            <ShareButton iconOnly path={`/media-kit#${c.slug}`} title={`Posledný zostrel – media kit: ${c.name}`} />
           </div>
           <Uploader kitCategory={c.slug} label="Nahrať" />
           <Gallery
@@ -53,9 +57,12 @@ export default async function MediaKitPage() {
       ))}
 
       <section id="texty" className="scroll-mt-44 space-y-3 md:scroll-mt-6">
-        <div>
-          <h2 className="font-serif text-xl font-semibold">Texty postov na FB</h2>
-          <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h2 className="font-serif text-xl font-semibold">Texty postov na FB</h2>
+            <p className="text-muted-foreground text-xs">Hotové texty pre správcov FB stránok – skopírovať a vložiť.</p>
+          </div>
+          <ShareButton iconOnly path="/media-kit#texty" title="Posledný zostrel – texty postov na FB" />
         </div>
         <Snippets snippets={(snippets ?? []) as Snippet[]} />
       </section>

@@ -5,6 +5,7 @@ import { withThumbs } from "@/lib/data";
 import { KINDS, type Asset, type EventRow } from "@/lib/types";
 import { formatDay, safeName } from "@/lib/utils";
 import { EventFormDialog } from "@/components/event-form";
+import { ShareButton } from "@/components/share-button";
 import { Uploader } from "@/components/uploader";
 import { Gallery } from "@/components/gallery";
 import { CopyButton } from "@/components/copy-button";
@@ -47,7 +48,10 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
         </div>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <h1 className="font-serif text-2xl leading-tight font-bold md:text-3xl">{e.title}</h1>
-          <EventFormDialog event={e} />
+          <div className="flex shrink-0 items-center gap-2">
+            <ShareButton path={`/udalosti/${e.id}`} title={e.title} text={e.description ?? undefined} />
+            <EventFormDialog event={e} />
+          </div>
         </div>
         <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
           {e.place && (
