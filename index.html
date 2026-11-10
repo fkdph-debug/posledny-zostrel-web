@@ -392,6 +392,27 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .site-footer a { color: var(--ink-brown); }
 .footnote { margin-top: 28px; padding-top: 18px; border-top: 1px solid #D8D2C6; color: var(--muted); font-size: 0.82rem; }
 @media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* Vyskakovacie okno – výstava (po 29. 11. 2026 sa prestane zobrazovať samo) */
+dialog.promo { border: 0; padding: 0; background: transparent; max-width: min(92vw, 540px); }
+dialog.promo::backdrop { background: rgba(20, 14, 12, .72); backdrop-filter: blur(2px); }
+.promo-card { position: relative; background: var(--surface); border-radius: var(--radius-lg); padding: clamp(24px, 5vw, 38px); display: grid; gap: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+.promo-card .eyebrow { color: var(--red); }
+.promo-card h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.3rem); }
+.promo-sub { font: 400 1.05rem/1.35 var(--font-display); color: var(--ink-brown); }
+.promo-info { margin: 4px 0 0; display: grid; gap: 10px; }
+.promo-info div { display: grid; grid-template-columns: 4.5em minmax(0, 1fr); gap: 12px; }
+.promo-info dt { color: var(--muted); font-size: .9rem; }
+.promo-info dd { margin: 0; font-weight: 500; color: var(--ink-brown); }
+.promo-info dd a { color: var(--ink-brown); }
+.promo-text { font-size: .95rem; color: #4a4542; }
+.promo-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.promo-close { position: absolute; top: 10px; right: 10px; width: 38px; height: 38px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.promo-close:hover { background: var(--sand); color: var(--ink-brown); }
+dialog.promo[open] { animation: promoIn .28s ease both; }
+@keyframes promoIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { dialog.promo[open] { animation: none; } }
+@media (max-width: 420px) { .promo-info div { grid-template-columns: 1fr; gap: 2px; } }
 </style>
 
 </head>
@@ -782,7 +803,47 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
   </div>
 </footer>
 
+
+<dialog class="promo" id="promo" aria-labelledby="promo-h">
+  <div class="promo-card">
+    <button type="button" class="promo-close" id="promo-x" aria-label="Zavrieť">&times;</button>
+    <p class="eyebrow">Výstava · do 29. novembra 2026</p>
+    <h2 id="promo-h">Posledný zostrel</h2>
+    <p class="promo-sub">Spomienka na leteckú legendu Mateja Beznáka</p>
+    <dl class="promo-info">
+      <div><dt>Kde</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=M%C3%BAzeum+dopravy+%C5%A0ancov%C3%A1+1B+Bratislava" target="_blank" rel="noopener">STM – Múzeum dopravy v Bratislave, Šancová 1/B</a></dd></div>
+      <div><dt>Kedy</dt><dd>2. 10. – 29. 11. 2026</dd></div>
+    </dl>
+    <p class="promo-text">Originály osobných dokumentov, vyznamenania, mapy a kompasy z pozostalosti Mateja Beznáka, obrazy lietadiel Kombinovanej letky od Pavla Sluku a lietadiel 2. svetovej vojny od Jána Pálffyho. Pod záštitou riaditeľa Vojenského historického ústavu, kurátor Jakub Prokeš.</p>
+    <div class="promo-actions">
+      <a class="btn" href="https://stm-ke.sk/en/branches/museum-of-transport-in-bratislava?lang=sk" target="_blank" rel="noopener">Otváracie hodiny a vstupné</a>
+      <button type="button" class="btn btn--ghost" id="promo-ok">Zavrieť</button>
+    </div>
+  </div>
+</dialog>
+
 <script>
+
+  // Vyskakovacie okno o výstave – samo sa vypne po jej skončení a po zavretí sa už neukáže
+  (function () {
+    var KONIEC = new Date('2026-11-30T00:00:00+01:00').getTime();
+    var KLUC = 'pz-vystava-2026';
+    var dlg = document.getElementById('promo');
+    if (!dlg || Date.now() >= KONIEC) return;
+    try { if (localStorage.getItem(KLUC)) return; } catch (e) {}
+    var zavri = function () {
+      try { localStorage.setItem(KLUC, '1'); } catch (e) {}
+      if (dlg.open) dlg.close();
+    };
+    document.getElementById('promo-x').addEventListener('click', zavri);
+    document.getElementById('promo-ok').addEventListener('click', zavri);
+    dlg.addEventListener('cancel', zavri);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) zavri(); });
+    setTimeout(function () {
+      if (typeof dlg.showModal === 'function') dlg.showModal();
+    }, 900);
+  })();
+
 (function () {
   // Sticky header border
   var header = document.querySelector('.site-header');
