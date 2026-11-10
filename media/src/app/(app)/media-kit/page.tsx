@@ -5,15 +5,18 @@ import { Uploader } from "@/components/uploader";
 import { Gallery } from "@/components/gallery";
 import { Snippets } from "./snippets";
 import { ShareButton } from "@/components/share-button";
+import { emailToUsername } from "@/lib/username";
 
 export const dynamic = "force-dynamic";
 
 export default async function MediaKitPage() {
   const supabase = await createClient();
-  const [{ data: assets, error }, { data: snippets }] = await Promise.all([
+  const [{ data: assets, error }, { data: snippets }, { data: auth }] = await Promise.all([
     supabase.from("assets").select("*").is("event_id", null).order("created_at"),
     supabase.from("snippets").select("*").order("position"),
+    supabase.auth.getUser(),
   ]);
+  const me = emailToUsername(auth.user?.email);
   const list = await withThumbs((assets ?? []) as Asset[]);
 
   return (
@@ -52,6 +55,7 @@ export default async function MediaKitPage() {
             assets={list.filter((a) => a.kit_category === c.slug)}
             zipName={`posledny-zostrel-${c.slug}`}
             empty="Zatiaľ prázdne."
+            me={me}
           />
         </section>
       ))}

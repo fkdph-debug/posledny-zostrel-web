@@ -60,3 +60,12 @@ export const KIT_CATEGORIES = [
 
 export const SALE_URL = "https://www.luc.sk/poslednyzostrel";
 export const SALE_LABEL = "www.luc.sk/poslednyzostrel";
+
+export type Comment = {
+  id: string;
+  event_id: string | null;
+  asset_id: string | null;
+  body: string;
+  author: string | null;
+  created_at: string;
+};

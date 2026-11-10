@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { CopyButton } from "@/components/copy-button";
+import { Comments } from "@/components/comments";
 import { cn, formatBytes, formatDate, isImage, isVideo } from "@/lib/utils";
 import {
   ChevronLeft,
@@ -68,11 +69,13 @@ function Tile({ a, onOpen }: { a: AssetView; onOpen: () => void }) {
 
 function Viewer({
   a,
+  me,
   onPrev,
   onNext,
   onDeleted,
 }: {
   a: AssetView;
+  me?: string;
   onPrev?: () => void;
   onNext?: () => void;
   onDeleted: () => void;
@@ -119,7 +122,7 @@ function Viewer({
   const touch = useRef<{ x: number; y: number } | null>(null);
 
   return (
-    <div className="grid gap-4 md:grid-cols-[1fr_280px]">
+    <div className="grid gap-4 md:grid-cols-[1fr_300px]">
       <div
         className="relative -mx-3 -mt-3 flex min-h-56 items-center justify-center overflow-hidden bg-neutral-900 sm:mx-0 sm:mt-0 sm:rounded-md"
         onTouchStart={(e) => (touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
@@ -219,6 +222,8 @@ function Viewer({
           </div>
         </div>
 
+        <Comments assetId={a.id} me={me} compact />
+
         <Button
           variant="ghost"
           size="sm"
@@ -242,11 +247,13 @@ export function Gallery({
   assets,
   zipName,
   empty = "Zatiaľ tu nič nie je.",
+  me,
   className,
 }: {
   assets: AssetView[];
   zipName: string;
   empty?: string;
+  me?: string;
   className?: string;
 }) {
   const [open, setOpen] = useState<number | null>(null);
@@ -326,6 +333,7 @@ export function Gallery({
             <Viewer
               key={current.id}
               a={current}
+              me={me}
               onPrev={open! > 0 ? () => setOpen(open! - 1) : undefined}
               onNext={open! < assets.length - 1 ? () => setOpen(open! + 1) : undefined}
               onDeleted={() => setOpen(null)}

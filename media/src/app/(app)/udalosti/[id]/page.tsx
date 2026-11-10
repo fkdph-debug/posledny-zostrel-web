@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { withThumbs } from "@/lib/data";
-import { KINDS, type Asset, type EventRow } from "@/lib/types";
+import { KINDS, type Asset, type Comment, type EventRow } from "@/lib/types";
+import { Comments } from "@/components/comments";
+import { emailToUsername } from "@/lib/username";
 import { formatDay, safeName } from "@/lib/utils";
 import { EventFormDialog } from "@/components/event-form";
 import { ShareButton } from "@/components/share-button";
@@ -17,10 +19,13 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
   const { id } = await params;
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const supabase = await createClient();
-  const [{ data: event }, { data: assets }] = await Promise.all([
+  const [{ data: event }, { data: assets }, { data: comments }, { data: auth }] = await Promise.all([
     supabase.from("events").select("*").eq("id", id).maybeSingle(),
     supabase.from("assets").select("*").eq("event_id", id).order("created_at"),
+    supabase.from("comments").select("*").eq("event_id", id).order("created_at"),
+    supabase.auth.getUser(),
   ]);
+  const me = emailToUsername(auth.user?.email);
   if (!event) notFound();
   const e = event as EventRow;
   const list = await withThumbs((assets ?? []) as Asset[]);
@@ -86,15 +91,20 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
           assets={media}
           zipName={`${e.date}-${safeName(e.title).slice(0, 50)}`}
           empty="Zatiaľ žiadne fotky ani videá."
+          me={me}
         />
       </section>
 
       {docs.length > 0 && (
         <section className="space-y-3">
           <h2 className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">Dokumenty</h2>
-          <Gallery assets={docs} zipName={`${e.date}-dokumenty`} />
+          <Gallery assets={docs} zipName={`${e.date}-dokumenty`} me={me} />
         </section>
       )}
+
+      <section>
+        <Comments eventId={e.id} initial={(comments ?? []) as Comment[]} me={me} />
+      </section>
     </div>
   );
 }

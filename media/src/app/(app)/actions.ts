@@ -177,3 +177,36 @@ export async function deleteSnippet(id: string) {
   if (error) throw new Error(error.message);
   revalidatePath("/media-kit");
 }
+
+// ---------- Komentáre ----------
+export async function addComment(input: { event_id?: string | null; asset_id?: string | null; body: string }) {
+  const { supabase, who } = await requireUser();
+  const body = input.body.trim();
+  if (!body) throw new Error("Prázdny komentár.");
+  const { data, error } = await supabase
+    .from("comments")
+    .insert({ event_id: input.event_id ?? null, asset_id: input.asset_id ?? null, body, author: who })
+    .select("*")
+    .single();
+  if (error) throw new Error(error.message);
+  if (input.event_id) revalidatePath(`/udalosti/${input.event_id}`);
+  return data;
+}
+
+export async function deleteComment(id: string, eventId?: string | null) {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.from("comments").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  if (eventId) revalidatePath(`/udalosti/${eventId}`);
+}
+
+export async function listComments(assetId: string) {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("comments")
+    .select("*")
+    .eq("asset_id", assetId)
+    .order("created_at");
+  if (error) throw new Error(error.message);
+  return data;
+}

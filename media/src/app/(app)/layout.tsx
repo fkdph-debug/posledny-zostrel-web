@@ -5,6 +5,32 @@ import { signOut } from "@/app/login/actions";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/copy-button";
 import { ExternalLink, LogOut, ShoppingCart } from "lucide-react";
+
+const PERKS = [
+  { badge: "0 €", sub: "poštovné", title: "Dodanie knihy zdarma", text: "už od jedného kusu", color: "bg-brand-green" },
+  { badge: "−15 %", sub: "", title: "Zľava 15 % pri nákupe 2 a viac kusov", text: "pre rodinu, kamarátov aj kolegov", color: "bg-brand-red" },
+];
+
+function Perks({ compact = false }: { compact?: boolean }) {
+  return (
+    <ul className={compact ? "flex gap-2" : "space-y-1.5"}>
+      {PERKS.map((p) => (
+        <li key={p.title} className="bg-card flex min-w-0 flex-1 items-center gap-2 rounded-md border px-2 py-1.5">
+          <span
+            className={`${p.color} flex size-9 shrink-0 flex-col items-center justify-center rounded-full text-white leading-none`}
+          >
+            <span className="text-[11px] font-bold">{p.badge}</span>
+            {p.sub && <span className="text-[7px] font-medium">{p.sub}</span>}
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-serif text-xs font-semibold">{p.title}</span>
+            {!compact && <span className="text-muted-foreground block text-[11px]">{p.text}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
 import { Nav } from "./nav";
 import { emailToUsername } from "@/lib/username";
 import { SALE_LABEL, SALE_URL } from "@/lib/types";
@@ -48,12 +74,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="px-3 pb-2">
           <Nav />
         </div>
-        <div className="border-brand-green/20 bg-brand-green/5 flex items-center gap-2 border-t px-3 py-1.5">
-          <ShoppingCart className="text-brand-green-dark size-4 shrink-0" />
-          <a href={SALE_URL} target="_blank" rel="noopener" className="min-w-0 flex-1 truncate text-sm font-medium">
-            {SALE_LABEL}
-          </a>
-          <CopyButton text={SALE_URL} label="Kopírovať" copiedLabel="Skopírované" className="bg-card h-8 shrink-0" />
+        <div className="border-brand-green/20 bg-brand-green/5 space-y-1.5 border-t px-3 py-1.5">
+          <div className="flex items-center gap-2">
+            <ShoppingCart className="text-brand-green-dark size-4 shrink-0" />
+            <a href={SALE_URL} target="_blank" rel="noopener" className="min-w-0 flex-1 truncate text-sm font-medium">
+              {SALE_LABEL}
+            </a>
+            <CopyButton text={SALE_URL} label="Kopírovať" copiedLabel="Skopírované" className="bg-card h-8 shrink-0" />
+          </div>
+          <Perks compact />
         </div>
       </header>
 
@@ -76,6 +105,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
               {SALE_LABEL} <ExternalLink className="size-3 shrink-0" />
             </a>
             <CopyButton text={SALE_URL} label="Kopírovať odkaz" copiedLabel="Odkaz skopírovaný" className="bg-card w-full" />
+            <Perks />
             <p className="text-muted-foreground text-[11px] leading-snug">
               Vždy používajte tento odkaz – presmeruje s UTM, takže vidíme, odkiaľ prišiel nákup.
             </p>

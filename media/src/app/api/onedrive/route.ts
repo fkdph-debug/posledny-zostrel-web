@@ -26,8 +26,14 @@ export async function GET(req: NextRequest) {
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ ok: false, error: "Neprihlásený." }, { status: 401 });
 
-  const url = req.nextUrl.searchParams.get("url") ?? "";
+  let url = req.nextUrl.searchParams.get("url") ?? "";
   const mode = req.nextUrl.searchParams.get("mode") ?? "view";
+  // alternatívne: podľa ID uloženého súboru (odkaz sa vezme z DB)
+  const assetId = req.nextUrl.searchParams.get("asset");
+  if (!url && assetId) {
+    const { data } = await supabase.from("assets").select("external_url").eq("id", assetId).maybeSingle();
+    url = data?.external_url ?? "";
+  }
   if (!isOneDriveUrl(url))
     return NextResponse.json({ ok: false, error: "Toto nie je odkaz na OneDrive / SharePoint." }, { status: 400 });
 
