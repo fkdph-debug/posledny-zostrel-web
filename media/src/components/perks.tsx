@@ -80,8 +80,13 @@ export function Perks({ compact = false }: { compact?: boolean }) {
           </ul>
           <div className="flex flex-wrap gap-2">
             <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+              <a href="/vianoce-fb.jpg" download="posledny-zostrel-vianoce-fb.jpg">
+                <Download /> Stiahnuť FB grafiku (s cenami)
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="bg-card">
               <a href={IMG} download="posledny-zostrel-vianocny-darcek.jpg">
-                <Download /> Stiahnuť obrázok
+                <Download /> Len obrázok knihy
               </a>
             </Button>
             <CopyButton text={SALE_URL} label="Kopírovať odkaz na predaj" copiedLabel="Odkaz skopírovaný" size="default" className="bg-card" />
