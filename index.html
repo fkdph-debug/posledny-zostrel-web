@@ -854,23 +854,35 @@ dialog.promo[open] { animation: promoIn .28s ease both; }
         <h2>Ideálne ako vianočný darček</h2>
         <p>Pevná väzba, 328 strán, vyše 250 dobových fotografií. Kniha, ktorá vracia do života kus našich dejín.</p>
         <div class="offers">
-          <a class="offer" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-zlava" target="_blank" rel="noopener">
-            <div class="offer-badge">−13 %</div>
-            <div><b>Zľava 13 % z ceny knihy</b><span>25,90 € namiesto 29,90 €</span></div>
-          </a>
-          <a class="offer" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-postovne" target="_blank" rel="noopener">
-            <div class="offer-badge is-green">0 €<small>poštovné</small></div>
-            <div><b>Dodanie knihy zdarma</b><span>už od jedného kusu</span></div>
-          </a>
-          <form class="offer-form" method="post" action="https://www.luc.sk/action/Cart/addCartItem/#kosik" target="_blank">
+          <form class="offer-form" method="post" action="https://www.luc.sk/action/Cart/addCartItem/#kosik&amp;utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-zlava" target="_blank">
+            <input type="hidden" name="productId" value="5516">
+            <input type="hidden" name="priceId" value="5522">
+            <input type="hidden" name="language" value="sk">
+            <input type="hidden" name="amount" value="1">
+            <button type="submit" class="offer" aria-label="Vložiť knihu do košíka so zľavou 13 %">
+              <div class="offer-badge">−13 %</div>
+              <div><b>Zľava 13 % z ceny knihy</b><span>25,90 € namiesto 29,90 € – kliknite a vložte knihu do košíka</span></div>
+            </button>
+          </form>
+          <form class="offer-form" method="post" action="https://www.luc.sk/action/Cart/addCartItem/#kosik&amp;utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-postovne" target="_blank">
+            <input type="hidden" name="productId" value="5516">
+            <input type="hidden" name="priceId" value="5522">
+            <input type="hidden" name="language" value="sk">
+            <input type="hidden" name="amount" value="1">
+            <button type="submit" class="offer" aria-label="Vložiť knihu do košíka, doprava zdarma">
+              <div class="offer-badge is-green">0 €<small>poštovné</small></div>
+              <div><b>Dodanie knihy zdarma</b><span>už od jedného kusu – kliknite a vložte knihu do košíka</span></div>
+            </button>
+          </form>
+          <form class="offer-form" method="post" action="https://www.luc.sk/action/Cart/addCartItem/#kosik&amp;utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-2ks" target="_blank">
             <input type="hidden" name="productId" value="5516">
             <input type="hidden" name="priceId" value="5522">
             <input type="hidden" name="language" value="sk">
             <input type="hidden" name="amount" value="2">
             <button type="submit" class="offer" aria-label="Vložiť 2 kusy knihy do košíka s ďalšou zľavou 5 %">
-            <div class="offer-badge is-gold">−5 %</div>
-            <div><b>Ďalších 5 % pri nákupe 2 a viac kusov</b><span>pre rodinu, kamarátov aj kolegov – kliknite a vložte 2 ks do košíka</span></div>
-          </button>
+              <div class="offer-badge is-gold">−5 %</div>
+              <div><b>Ďalších 5 % pri nákupe 2 a viac kusov</b><span>pre rodinu, kamarátov aj kolegov – kliknite a vložte 2 ks do košíka</span></div>
+            </button>
           </form>
         </div>
         <a class="btn" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=5516" target="_blank" rel="noopener">Kúpte výhodne</a>
