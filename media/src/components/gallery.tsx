@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { CopyButton } from "@/components/copy-button";
 import { Comments } from "@/components/comments";
+import { ShareButton } from "@/components/share-button";
 import { cn, formatBytes, formatDate, isImage, isVideo } from "@/lib/utils";
 import {
   ChevronLeft,
@@ -56,6 +57,7 @@ function LinkList({ links, me }: { links: AssetView[]; me?: string }) {
                 </span>
               </a>
               <CopyButton text={a.external_url!} label="Kopírovať" size="icon-sm" variant="ghost" />
+              <ShareButton path={`${typeof window !== "undefined" ? window.location.pathname : ""}?foto=${a.id}`} title={a.name} iconOnly />
               <Button
                 variant="ghost"
                 size="icon-sm"
@@ -247,9 +249,17 @@ function Viewer({
           </p>
         </div>
 
-        <Button onClick={download} className="bg-brand-green hover:bg-brand-green-dark text-white">
-          <Download /> {a.external_url ? "Otvoriť / stiahnuť z OneDrive" : "Stiahnuť originál"}
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={download} className="bg-brand-green hover:bg-brand-green-dark min-w-0 flex-1 text-white">
+            <Download /> {a.external_url ? "Otvoriť / stiahnuť z OneDrive" : "Stiahnuť originál"}
+          </Button>
+          <ShareButton
+            path={`${typeof window !== "undefined" ? window.location.pathname : ""}?foto=${a.id}`}
+            title={a.caption ?? a.name}
+            iconOnly
+            className="bg-card size-9 border"
+          />
+        </div>
         {a.external_url && (
           <a
             href={a.external_url}
@@ -329,8 +339,25 @@ export function Gallery({
 }) {
   // odkazy (bez súboru v Storage) sa zobrazujú ako zoznam, nie dlaždice
   const assets = allAssets.filter((a) => a.path);
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpenState] = useState<number | null>(null);
   const [zipping, setZipping] = useState<string | null>(null);
+
+  // ?foto=<id> v adrese otvorí konkrétny súbor (zdieľateľný odkaz)
+  const setOpen = (i: number | null) => {
+    setOpenState(i);
+    if (typeof window === "undefined") return;
+    const u = new URL(window.location.href);
+    if (i === null) u.searchParams.delete("foto");
+    else u.searchParams.set("foto", assets[i].id);
+    window.history.replaceState(null, "", u.toString());
+  };
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("foto");
+    if (!id) return;
+    const i = assets.findIndex((a) => a.id === id);
+    if (i >= 0) setOpenState(i);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const current = open !== null ? assets[open] : null;
 
   async function downloadAll() {
