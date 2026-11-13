@@ -402,6 +402,10 @@ dialog.lightbox img { max-height: 86vh; width: auto; margin: 0 auto; border-radi
 .offer-badge small { display: block; font-size: 0.58rem; font-weight: 500; line-height: 1; }
 .offer b { font: 600 1.05rem/1.2 var(--font-display); color: #000; display: block; }
 .offer span { font-size: 0.9rem; color: #4a4542; }
+.offer-form { display: contents; }
+button.offer { font: inherit; text-align: left; width: 100%; cursor: pointer; }
+a.offer, button.offer { text-decoration: none; color: inherit; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+a.offer:hover, a.offer:focus-visible, button.offer:hover, button.offer:focus-visible { transform: translateY(-2px); border-color: var(--green); box-shadow: 0 6px 18px rgba(26,20,18,.10); }
 @media (max-width: 820px) { .buy-grid { grid-template-columns: 1fr; } }
 
 /* Footer / impressum */
@@ -850,18 +854,24 @@ dialog.promo[open] { animation: promoIn .28s ease both; }
         <h2>Ideálne ako vianočný darček</h2>
         <p>Pevná väzba, 328 strán, vyše 250 dobových fotografií. Kniha, ktorá vracia do života kus našich dejín.</p>
         <div class="offers">
-          <div class="offer">
+          <a class="offer" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-zlava" target="_blank" rel="noopener">
             <div class="offer-badge">−13 %</div>
             <div><b>Zľava 13 % z ceny knihy</b><span>25,90 € namiesto 29,90 €</span></div>
-          </div>
-          <div class="offer">
+          </a>
+          <a class="offer" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=offer-postovne" target="_blank" rel="noopener">
             <div class="offer-badge is-green">0 €<small>poštovné</small></div>
             <div><b>Dodanie knihy zdarma</b><span>už od jedného kusu</span></div>
-          </div>
-          <div class="offer">
+          </a>
+          <form class="offer-form" method="post" action="https://www.luc.sk/action/Cart/addCartItem/" target="_blank">
+            <input type="hidden" name="productId" value="5516">
+            <input type="hidden" name="priceId" value="5522">
+            <input type="hidden" name="language" value="sk">
+            <input type="hidden" name="amount" value="2">
+            <button type="submit" class="offer" aria-label="Vložiť 2 kusy knihy do košíka s ďalšou zľavou 5 %">
             <div class="offer-badge is-gold">−5 %</div>
-            <div><b>Ďalších 5 % pri nákupe 2 a viac kusov</b><span>pre rodinu, kamarátov aj kolegov</span></div>
-          </div>
+            <div><b>Ďalších 5 % pri nákupe 2 a viac kusov</b><span>pre rodinu, kamarátov aj kolegov – kliknite a vložte 2 ks do košíka</span></div>
+          </button>
+          </form>
         </div>
         <a class="btn" href="https://www.luc.sk/posledny-zostrel/?utm_source=poslednyzostrel.sk&amp;utm_medium=social&amp;utm_campaign=posledny&amp;utm_content=5516" target="_blank" rel="noopener">Kúpte výhodne</a>
       </div>
