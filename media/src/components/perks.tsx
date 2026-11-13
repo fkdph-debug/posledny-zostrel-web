@@ -10,13 +10,14 @@ import { cn } from "@/lib/utils";
 import { Download, ExternalLink } from "lucide-react";
 
 export const PERKS = [
+  { badge: "−13 %", sub: "", title: "Zľava 13 % z ceny knihy", text: "25,90 € namiesto 29,90 €", color: "bg-brand-red" },
   { badge: "0 €", sub: "poštovné", title: "Dodanie knihy zdarma", text: "už od jedného kusu", color: "bg-brand-green" },
-  { badge: "−15 %", sub: "", title: "Zľava 15 % pri nákupe 2 a viac kusov", text: "pre rodinu, kamarátov aj kolegov", color: "bg-brand-red" },
+  { badge: "−5 %", sub: "", title: "Ďalších 5 % pri nákupe 2 a viac kusov", text: "pre rodinu, kamarátov aj kolegov", color: "bg-[#BC975B]" },
 ];
 
 const IMG = "/kniha-vianoce.jpg";
 
-/** Dve výhody pri predaji; kliknutie otvorí vianočný vizuál z poslednyzostrel.sk. */
+/** Výhody pri predaji; kliknutie otvorí vianočný vizuál z poslednyzostrel.sk. */
 export function Perks({ compact = false }: { compact?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
@@ -60,7 +61,7 @@ export function Perks({ compact = false }: { compact?: boolean }) {
               className="absolute w-[95%] bg-[#E8C97A] py-2.5 text-center text-[0.75rem] font-bold tracking-[0.12em] text-[#16483A] uppercase shadow-md sm:text-[0.85rem]"
               style={{ left: "18%", top: "73.2%", transform: "translate(-50%,-50%) rotate(47deg)" }}
             >
-              Doprava zdarma
+              Zľava 13 %
             </span>
           </div>
           <ul className="space-y-1.5">
@@ -91,7 +92,7 @@ export function Perks({ compact = false }: { compact?: boolean }) {
             </Button>
           </div>
           <p className="text-muted-foreground text-xs">
-            Obrázok je bez pások – tie sú len na webe. Text k postu: „Dodanie zdarma už od jedného kusu, −15 % pri 2 a viac kusoch.“
+            Obrázok je bez pások – tie sú len na webe. Text k postu: „Zľava 13 % – 25,90 € namiesto 29,90 €, dodanie zdarma už od jedného kusu, ďalších −5 % pri 2 a viac kusoch.“
           </p>
         </DialogContent>
       </Dialog>
