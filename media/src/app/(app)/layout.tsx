@@ -4,8 +4,9 @@ import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/app/login/actions";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/copy-button";
-import { ExternalLink, LogOut, ShoppingCart } from "lucide-react";
+import { ExternalLink, Landmark, LogOut, ShoppingCart } from "lucide-react";
 import { Perks } from "@/components/perks";
+import { Vystava } from "@/components/vystava";
 import { Nav } from "./nav";
 import { emailToUsername } from "@/lib/username";
 import { SALE_LABEL, SALE_URL } from "@/lib/types";
@@ -49,6 +50,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="px-3 pb-2">
           <Nav />
         </div>
+        <div className="border-brand-gold/25 bg-brand-gold/5 border-t px-3 py-1.5">
+          <Vystava compact />
+        </div>
         <div className="border-brand-green/20 bg-brand-green/5 space-y-1.5 border-t px-3 py-1.5">
           <div className="flex items-center gap-2">
             <ShoppingCart className="text-brand-green-dark size-4 shrink-0" />
@@ -66,6 +70,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="sticky top-0 flex h-dvh flex-col gap-4 p-4">
           {brand}
           <Nav />
+
+          <div className="border-brand-gold/40 bg-brand-gold/5 space-y-2 rounded-lg border p-3">
+            <p className="flex items-center gap-1.5 text-[11px] font-semibold tracking-wide text-brand-gold uppercase">
+              <Landmark className="size-3.5" /> Výstava · do 29. 11. 2026
+            </p>
+            <Vystava />
+          </div>
 
           <div className="border-brand-green/30 bg-brand-green/5 space-y-2 rounded-lg border p-3">
             <p className="text-brand-green-dark flex items-center gap-1.5 text-[11px] font-semibold tracking-wide uppercase">
