@@ -38,7 +38,8 @@ export async function middleware(request: NextRequest) {
     url.pathname = "/login";
     url.search = "";
     // po prihlásení vrátiť na pôvodnú stránku (napr. odkaz na úlohu)
-    if (pathname !== "/") url.searchParams.set("next", pathname + request.nextUrl.search);
+    if (pathname !== "/" || request.nextUrl.search)
+      url.searchParams.set("next", pathname + request.nextUrl.search);
     return NextResponse.redirect(url);
   }
   if (user && pathname.startsWith("/login")) {
