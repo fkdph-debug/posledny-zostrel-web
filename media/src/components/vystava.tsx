@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,9 @@ const FOTKY = [
   { n: "09", popis: "Osobné doklady, vyznamenania a portrét Mateja Beznáka" },
 ];
 
+/** Zdieľaný odkaz …/?vystava otvorí toto okno rovno po načítaní. */
+const PARAM = "vystava";
+
 const BANNER_WIDE = "/vystava/fb-1200x630.jpg";
 const BANNER_SQUARE = "/vystava/fb-1080x1080.jpg";
 const IG_PORTRAIT = "/vystava/ig-1800x2250.jpg";
@@ -53,6 +56,20 @@ const IG_POST =
 /** Výstava v Múzeu dopravy: fotografie z otvorenia a hotové vizuály na sociálne siete. */
 export function Vystava({ compact = false }: { compact?: boolean }) {
   const [open, setOpen] = useState(false);
+
+  // Okno otvára len jedna inštancia (bočný panel), aby sa zo zdieľaného odkazu neotvorili dve naraz.
+  useEffect(() => {
+    if (!compact && new URLSearchParams(window.location.search).has(PARAM)) setOpen(true);
+  }, [compact]);
+
+  function onOpenChange(v: boolean) {
+    setOpen(v);
+    if (v) return;
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has(PARAM)) return;
+    url.searchParams.delete(PARAM);
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+  }
 
   return (
     <>
@@ -80,7 +97,7 @@ export function Vystava({ compact = false }: { compact?: boolean }) {
         </span>
       </button>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="max-h-[95dvh] overflow-y-auto p-3 sm:max-w-3xl sm:p-5">
           <DialogTitle className="font-serif text-lg">
             Výstava {VYSTAVA.nazov} – {VYSTAVA.podnazov}
@@ -177,12 +194,6 @@ export function Vystava({ compact = false }: { compact?: boolean }) {
                 </a>
               </Button>
               <CopyButton text={IG_POST} label="Kopírovať text k IG postu" copiedLabel="Text skopírovaný" size="sm" className="bg-card" />
-              <ShareButton
-                path={IG_PORTRAIT}
-                title="Pozvánka na výstavu Posledný zostrel"
-                text={IG_POST}
-                label="Zdieľať pozvánku"
-              />
             </div>
           </div>
 
@@ -192,6 +203,14 @@ export function Vystava({ compact = false }: { compact?: boolean }) {
                 <Download /> Stiahnuť banner 1200 × 630
               </a>
             </Button>
+            <ShareButton
+              path={`/?${PARAM}`}
+              title="Výstava Posledný zostrel – STM Múzeum dopravy v Bratislave"
+              text={POST}
+              label="Zdieľať sekciu"
+              size="default"
+              className="bg-card"
+            />
             <CopyButton text={POST} label="Kopírovať text k FB postu" copiedLabel="Text skopírovaný" size="default" className="bg-card" />
             <Button asChild variant="outline" className="bg-card">
               <a href={VYSTAVA.web} target="_blank" rel="noopener">

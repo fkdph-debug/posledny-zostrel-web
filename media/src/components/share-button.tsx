@@ -16,6 +16,7 @@ export function ShareButton({
   title,
   text,
   label = "Zdieľať",
+  size = "sm",
   iconOnly = false,
   className,
 }: {
@@ -26,6 +27,7 @@ export function ShareButton({
   title: string;
   text?: string;
   label?: string;
+  size?: "sm" | "default";
   iconOnly?: boolean;
   className?: string;
 }) {
@@ -65,7 +67,7 @@ export function ShareButton({
       </Button>
     );
   return (
-    <Button type="button" variant="outline" size="sm" onClick={share} className={cn("bg-card", className)}>
+    <Button type="button" variant="outline" size={size} onClick={share} className={cn("bg-card", className)}>
       {icon} {copied ? "Odkaz skopírovaný" : label}
     </Button>
   );
