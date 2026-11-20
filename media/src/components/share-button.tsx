@@ -12,14 +12,20 @@ import { Check, Share2 } from "lucide-react";
  */
 export function ShareButton({
   path,
+  url: absoluteUrl,
   title,
   text,
+  label = "Zdieľať",
   iconOnly = false,
   className,
 }: {
-  path: string;
+  /** Cesta v rámci media hubu – doplní sa aktuálna doména. */
+  path?: string;
+  /** Celá adresa (napr. verejný web) – má prednosť pred `path`. */
+  url?: string;
   title: string;
   text?: string;
+  label?: string;
   iconOnly?: boolean;
   className?: string;
 }) {
@@ -28,7 +34,7 @@ export function ShareButton({
   async function share(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    const url = window.location.origin + path;
+    const url = absoluteUrl ?? window.location.origin + (path ?? "");
     const nav = typeof navigator !== "undefined" ? navigator : null;
     if (nav?.share && /Android|iPhone|iPad/i.test(nav.userAgent)) {
       try {
@@ -60,7 +66,7 @@ export function ShareButton({
     );
   return (
     <Button type="button" variant="outline" size="sm" onClick={share} className={cn("bg-card", className)}>
-      {icon} {copied ? "Odkaz skopírovaný" : "Zdieľať"}
+      {icon} {copied ? "Odkaz skopírovaný" : label}
     </Button>
   );
 }

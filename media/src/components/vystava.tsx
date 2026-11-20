@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/copy-button";
+import { ShareButton } from "@/components/share-button";
 import { Download, ExternalLink } from "lucide-react";
 
 export const VYSTAVA = {
@@ -176,6 +177,12 @@ export function Vystava({ compact = false }: { compact?: boolean }) {
                 </a>
               </Button>
               <CopyButton text={IG_POST} label="Kopírovať text k IG postu" copiedLabel="Text skopírovaný" size="sm" className="bg-card" />
+              <ShareButton
+                path={IG_PORTRAIT}
+                title="Pozvánka na výstavu Posledný zostrel"
+                text={IG_POST}
+                label="Zdieľať pozvánku"
+              />
             </div>
           </div>
 
