@@ -29,6 +29,8 @@ const FOTKY = [
 
 const BANNER_WIDE = "/vystava/fb-1200x630.jpg";
 const BANNER_SQUARE = "/vystava/fb-1080x1080.jpg";
+const IG_PORTRAIT = "/vystava/ig-1800x2250.jpg";
+const IG_LANDSCAPE = "/vystava/ig-2400x1800.jpg";
 
 const POST =
   "Výstava Posledný zostrel – spomienka na leteckú legendu Mateja Beznáka. " +
@@ -37,6 +39,15 @@ const POST =
   "Pod záštitou riaditeľa Vojenského historického ústavu, kurátor Jakub Prokeš. " +
   "STM – Múzeum dopravy v Bratislave, Šancová 1/B, do 29. novembra 2026. " +
   "Viac na poslednyzostrel.sk";
+
+const IG_POST =
+  "Posledné dni výstavy Posledný zostrel – spomienka na leteckú legendu Mateja Beznáka ✈️\n" +
+  "📍 STM – Múzeum dopravy v Bratislave, Šancová 1/B\n" +
+  "🗓 do 29. novembra 2026\n\n" +
+  "Originály dokumentov, vyznamenania, mapy a kompasy z Beznákovej pozostalosti, obrazy lietadiel od Pavla Sluku a Jána Pálffyho. " +
+  "Kurátor Jakub Prokeš, pod záštitou riaditeľa VHÚ.\n\n" +
+  "Kniha o Matejovi Beznákovi na poslednyzostrel.sk (odkaz v bio).\n\n" +
+  "#PoslednyZostrel #MatejBeznak #SNP #letectvo #MuzeumDopravy #Bratislava #vystava";
 
 /** Výstava v Múzeu dopravy: fotografie z otvorenia a hotové vizuály na sociálne siete. */
 export function Vystava({ compact = false }: { compact?: boolean }) {
@@ -113,7 +124,7 @@ export function Vystava({ compact = false }: { compact?: boolean }) {
 
           <div>
             <p className="text-muted-foreground mb-1.5 text-[11px] font-semibold tracking-wide uppercase">
-              Hotové vizuály na sociálne siete
+              Bannery na Facebook
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
               <a
@@ -133,13 +144,48 @@ export function Vystava({ compact = false }: { compact?: boolean }) {
             </div>
           </div>
 
+          <div>
+            <p className="text-muted-foreground mb-1.5 text-[11px] font-semibold tracking-wide uppercase">
+              Pozvánka na Instagram · 4:5 do feedu, 4:3 na šírku
+            </p>
+            <div className="grid grid-cols-[2fr_3fr] gap-2">
+              <a
+                href={IG_PORTRAIT}
+                download="posledny-zostrel-vystava-ig-4x5.jpg"
+                className="hover:border-brand-gold/60 block overflow-hidden rounded-md border transition-colors"
+              >
+                <Image src={IG_PORTRAIT} alt="Pozvánka na výstavu pre Instagram 1800 × 2250" width={1800} height={2250} className="w-full" />
+              </a>
+              <a
+                href={IG_LANDSCAPE}
+                download="posledny-zostrel-vystava-ig-4x3.jpg"
+                className="hover:border-brand-gold/60 block self-start overflow-hidden rounded-md border transition-colors"
+              >
+                <Image src={IG_LANDSCAPE} alt="Pozvánka na výstavu pre Instagram 2400 × 1800" width={2400} height={1800} className="w-full" />
+              </a>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Button asChild size="sm" className="bg-brand-green hover:bg-brand-green-dark text-white">
+                <a href={IG_PORTRAIT} download="posledny-zostrel-vystava-ig-4x5.jpg">
+                  <Download /> Stiahnuť 4:5
+                </a>
+              </Button>
+              <Button asChild size="sm" variant="outline" className="bg-card">
+                <a href={IG_LANDSCAPE} download="posledny-zostrel-vystava-ig-4x3.jpg">
+                  <Download /> Stiahnuť 4:3
+                </a>
+              </Button>
+              <CopyButton text={IG_POST} label="Kopírovať text k IG postu" copiedLabel="Text skopírovaný" size="sm" className="bg-card" />
+            </div>
+          </div>
+
           <div className="flex flex-wrap gap-2">
             <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
               <a href={BANNER_WIDE} download="posledny-zostrel-vystava-fb-1200x630.jpg">
                 <Download /> Stiahnuť banner 1200 × 630
               </a>
             </Button>
-            <CopyButton text={POST} label="Kopírovať text k postu" copiedLabel="Text skopírovaný" size="default" className="bg-card" />
+            <CopyButton text={POST} label="Kopírovať text k FB postu" copiedLabel="Text skopírovaný" size="default" className="bg-card" />
             <Button asChild variant="outline" className="bg-card">
               <a href={VYSTAVA.web} target="_blank" rel="noopener">
                 <ExternalLink /> Výstava na webe
