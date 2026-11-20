@@ -52,6 +52,7 @@ export type Snippet = {
 
 export const KIT_CATEGORIES = [
   { slug: "kniha", name: "Fotky z knihy", hint: "Dvojstrany, ukážky strán, dobové fotografie z knihy" },
+  { slug: "bokorysy", name: "Bokorysy lietadiel", hint: "Farebné bokorysy z knihy – čisté vo vysokom rozlíšení aj 4:3 s popisom do feedu · autori: Jozef Anďal (HTmodel), Pavol Sluka" },
   { slug: "vizualy", name: "Obálka a vizuály", hint: "Obálka, mockupy, maľba súboja, bannery, thumbnaily" },
   { slug: "videa", name: "Videá", hint: "FB video 4:5, short / reel 9:16, reportáže · veľké originály ako odkazy (OneDrive, YouTube)" },
   { slug: "logo", name: "Logá", hint: "Znak letky, logá partnerov" },
